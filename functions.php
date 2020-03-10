@@ -24,12 +24,13 @@ function enqueue_child_styles() {
 
 		// Register Scripts
 		$child_theme_js_path = '/assets/js/child-theme.min.js';
-		wp_register_script( 'child-theme-js', get_stylesheet_directory_uri() . $child_theme_js_path, array(), filemtime( get_stylesheet_directory() . $child_theme_js_path ), true );
+		wp_register_script( 'child-theme-js', get_stylesheet_directory_uri() . $child_theme_js_path, array('jquery'), filemtime( get_stylesheet_directory() . $child_theme_js_path ), true );
 
 		// Enqueue Styles
 		wp_enqueue_style( 'child-theme-css' );
 
 		// Enqueue Scripts
+		wp_enqueue_script( 'child-theme-js');
 
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_child_styles' );
@@ -52,3 +53,6 @@ add_action( 'wp_enqueue_scripts', 'enqueue_child_styles' );
 //     return $paths;
 
 // }
+
+/* for Contact-Form-7 */
+add_filter('wpcf7_autop_or_not', '__return_false');
