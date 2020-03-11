@@ -1,16 +1,20 @@
-$vp_xxs: 380px;
-$vp_xs: 575px;
-$vp_sm: 767px;
-$vp_m: 992px;
-$vp_lg: 1210px;
-$vp_xl: 1680px;
-$vp_xxl: 1920px;
-
+@import "./import/variables";
 @media screen and (min-width: $vp_xxl) {
 	.container.container-ext {
 		max-width: 1440px;
 	}
 }
+/*   Parent Theme Overrides   */
+#menu-wrapper {
+	&.xten-standard-internet-header {
+		.site-header {
+			&#masthead {
+				background-color: $primary;
+			}
+		}
+	}
+}
+/*   Parent Theme Overrides   */
 
 /*   Contact Form   */
 .wpcf7 {
@@ -52,5 +56,12 @@ body {
 		.desktop-only {
 			display: none;
 		}
+	}
+}
+.btn {
+	&.btn-primary {
+		color: $secondary;
+		background-color: $primary;
+		border-color: $primary;
 	}
 }
