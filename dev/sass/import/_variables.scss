@@ -22,3 +22,10 @@ $off-white: rgb(254, 254, 254);
 $dark: rgb(64, 64, 64);
 $darker: rgb(32, 32, 32);
 /*   /Colors   */
+
+/*   Smooth Transition    */
+.smooth-transition {
+	transition: all.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+$active: "&:hover,&:focus,&.active";

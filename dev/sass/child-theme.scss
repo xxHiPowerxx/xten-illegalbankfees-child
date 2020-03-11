@@ -59,9 +59,36 @@ body {
 	}
 }
 .btn {
+	@extend .smooth-transition;
 	&.btn-primary {
 		color: $secondary;
 		background-color: $primary;
 		border-color: $primary;
+		#{$active} {
+			color: $primary-darker;
+			background-color: $off-white;
+			border-color: $primary;
+			box-shadow: 0 0.2em 0.2em rgba($darker, 0.35);
+		}
 	}
 }
+
+/*   Footer    */
+.site-footer {
+	&.standard-site-footer {
+		background: linear-gradient(to bottom, $primary 0%, $primary-darker 100%);
+		.site-info-footer-wrapper {
+			.site-info {
+				color: $off-white;
+				a {
+					color: inherit;
+					@extend .smooth-transition;
+					#{$active} {
+						color: $secondary;
+					}
+				}
+			}
+		}
+	}
+}
+/*   /Footer    */
