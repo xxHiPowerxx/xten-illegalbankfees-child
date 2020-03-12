@@ -7,40 +7,45 @@
  * @package xten
  */
 
+$entry_title = is_front_page() ? esc_attr( get_bloginfo() ) : esc_attr( get_the_title() );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'content-area card-style' ); ?>>
 	<header class="entry-header">
-		<?php
-
-		if ( 'post' === get_post_type() ) :
-			?>
-			<div class="entry-meta xten-highlight-font">
-				<?php
-				if ( is_singular() ) :
-					the_title( '<h1 class="entry-title">', '</h1>' );
-				else :
-					the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-				endif;
+		<?php if ( has_post_thumbnail() ) :
+			$hide_post_image = get_post_meta( $post->ID, 'hide_featured_image', true );
+			if ( ! $hide_post_image ) :
 				?>
-				<div class="post-date">
+				<div class="featured-image">
+					<?php xten_post_thumbnail( array(957,536) ); ?>
+					<h1 class="entry-title"><?php echo $entry_title; ?></h1>
+				</div><!-- featured-image -->
+				<?php
+			endif;
+		else: // ! if ( has_post_thumbnail() ) :
+
+			if ( 'post' === get_post_type() ) :
+				?>
+				<div class="entry-meta xten-highlight-font">
 					<?php
-						xten_posted_on();
+					if ( is_singular() ) :
+						the_title( '<h1 class="entry-title">', '</h1>' );
+					else :
+						the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+					endif;
 					?>
-				</div><!-- .post-date -->
-			</div><!-- .entry-meta -->
-			<?php
-		endif;
+					<div class="post-date">
+						<?php
+							xten_posted_on();
+						?>
+					</div><!-- .post-date -->
+				</div><!-- .entry-meta -->
+				<?php
+			endif;
+
+		endif; // endif ( has_post_thumbnail() ) :
 		?>
 	</header><!-- .entry-header -->
-	<?php
-		$hide_post_image = get_post_meta( $post->ID, 'hide_featured_image', true );
-	?>
-	<?php if ( has_post_thumbnail() && ! $hide_post_image ) : ?>
-	<div class="featured-image">
-		<?php xten_post_thumbnail(); ?>
-	</div><!-- featured-image -->
-	<?php endif; ?>
 
 	<div class="entry-content">
 		<?php
