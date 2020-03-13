@@ -30,7 +30,9 @@ $weird-content-padding: 1.875rem;
 		margin: (-$weird-content-padding) (-$weird-content-padding) 0;
 		overflow: hidden;
 		&:before {
-			content: "";
+			@media (min-width: 420px) {
+				content: "";
+			}
 			display: block;
 			padding-bottom: 56.25%;
 		}
@@ -44,9 +46,8 @@ $weird-content-padding: 1.875rem;
 			max-width: none;
 		}
 		.featured-image-mask {
-			position: absolute;
 			color: $white;
-			padding: 0.5em $weird-content-padding;
+			padding: $weird-content-padding;
 			// background-image: linear-gradient(
 			// 	to top,
 			// 	rgba(0, 0, 0, 0.63) 40%,
@@ -61,10 +62,15 @@ $weird-content-padding: 1.875rem;
 			background-color: rgba(0, 0, 0, 0.35);
 			text-shadow: 0 0.05em 0.025em rgba(0, 0, 0, 0.35);
 			top: 0;
+			position: relative;
+			@media (min-width: 420px) {
+				position: absolute;
+			}
 		}
 		.entry-title {
 			margin-bottom: 0;
 			max-width: 10.5em;
+			text-align: center;
 		}
 	}
 }
