@@ -56,3 +56,8 @@ add_action( 'wp_enqueue_scripts', 'enqueue_child_styles' );
 
 /* for Contact-Form-7 */
 add_filter('wpcf7_autop_or_not', '__return_false');
+
+/**
+ * Inline Styles.
+ */
+// require get_stylesheet_directory() . '/inc/xten-child-inline-styles.php';
