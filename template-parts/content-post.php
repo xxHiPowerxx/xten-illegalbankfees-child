@@ -7,7 +7,6 @@
  * @package xten
  */
 
-$entry_title = is_front_page() ? esc_attr( get_bloginfo() ) : esc_attr( get_the_title() );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'content-area card-style' ); ?>>
@@ -18,7 +17,9 @@ $entry_title = is_front_page() ? esc_attr( get_bloginfo() ) : esc_attr( get_the_
 				?>
 				<div class="featured-image">
 					<?php xten_post_thumbnail( array(957,536) ); ?>
-					<h1 class="entry-title"><?php echo $entry_title; ?></h1>
+					<div class="featured-image-mask">
+						<h1 class="entry-title"><?php the_title(); ?></h1>
+					</div>
 				</div><!-- featured-image -->
 				<?php
 			endif;
