@@ -29,19 +29,13 @@ wp_register_style( 'xten-standard-header-inline-style', false );
 wp_enqueue_style( 'xten-standard-header-inline-style', '', 'xten-content-css' );
 wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 ?>
-<div class="xten-menu">
-	<?php
-	$GLOBALS['new_xten_header_mobile'] = 'new_xten_header_main';
-	$is_mobile_gobal_nav                 = false;
-	?>
-</div>
 <header id="masthead" class="site-header new-site-header fixed-header">
 	<div class="navbar" id="mainNav">
 		<div class="header-container container container-ext">
 			<div class="site-branding">
 				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
 				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
-					<div class="custom-logo <?php echo file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ? 'child-logo' : ''; ?>">
+					<div class="ctnr-custom-logo <?php echo file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ? 'child-logo' : ''; ?>">
 						<?php
 						if ( file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ) :
 							require get_stylesheet_directory() . '/header-logo.svg';
