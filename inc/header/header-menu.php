@@ -33,7 +33,7 @@ if ( $locations && isset( $locations[ $menu_name ] ) ) :
 				<div class="site-branding">
 					<?php	$home_url = esc_url( home_url( '/' ) ); ?>
 					<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
-						<div class="custom-logo <?php echo file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ? 'child-logo' : ''; ?>">
+						<div class="ctnr-custom-logo <?php echo file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ? 'child-logo' : ''; ?>">
 							<?php
 							if ( file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ) :
 								require get_stylesheet_directory() . '/header-logo.svg';
