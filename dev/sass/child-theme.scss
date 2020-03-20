@@ -14,6 +14,9 @@
 		}
 	}
 }
+.main-container {
+	padding-bottom: 6rem;
+}
 /*   Parent Theme Overrides   */
 
 /*   Blog Post/Home Page   */
@@ -70,8 +73,10 @@ $weird-content-padding: 1.875rem;
 		}
 		.entry-title {
 			margin-bottom: 0;
-			max-width: 10.5em;
 			text-align: center;
+			* {
+				display: inline-block;
+			}
 		}
 	}
 }

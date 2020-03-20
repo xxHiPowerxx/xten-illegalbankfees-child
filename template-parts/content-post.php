@@ -7,6 +7,12 @@
  * @package xten
  */
 
+function use_acf_field_h1() {
+	$h1 = wp_kses_post( get_field( 'page_heading_override', false, false ) );
+	return $h1;
+}
+$get_the_title = use_acf_field_h1() === '' ? get_the_title() : use_acf_field_h1();
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'content-area card-style' ); ?>>
@@ -18,7 +24,7 @@
 				<div class="featured-image">
 					<?php xten_post_thumbnail( array(957,536) ); ?>
 					<div class="featured-image-mask">
-						<h1 class="entry-title"><?php the_title(); ?></h1>
+						<h1 class="entry-title"><?php echo $get_the_title; ?></h1>
 					</div>
 				</div><!-- featured-image -->
 				<?php
