@@ -36,23 +36,29 @@ function enqueue_child_styles() {
 add_action( 'wp_enqueue_scripts', 'enqueue_child_styles' );
 	
 // IF ACF-JSON is a requirement create the acf-json folder and uncoment the following
-// // Load fields.
-// add_filter('acf/settings/load_json', 'child_acf_json_load_point');
+// Load fields.
+add_filter('acf/settings/load_json', 'child_acf_json_load_point');
 
-// function child_acf_json_load_point( $paths ) {
+function child_acf_json_load_point( $paths ) {
 
-//     // remove original path (optional)
-//     unset($paths[0]);
-
-
-//     // append path
-//     $paths[] = get_stylesheet_directory() . '/acf-json';
+    // remove original path (optional)
+    // unset($paths[0]);
 
 
-//     // return
-//     return $paths;
+    // append path
+    $paths[] = get_stylesheet_directory() . '/acf/acf-json';
 
-// }
+
+    // return
+    return $paths;
+
+}
+
+// Check to see if xten Save fields file exsists and adds save point if it does.
+$save_acf_fields = get_stylesheet_directory() . '/acf/save-acf-fields.php';
+if ( file_exists( $save_acf_fields ) ) {
+	require $save_acf_fields;
+}
 
 /* for Contact-Form-7 */
 add_filter('wpcf7_autop_or_not', '__return_false');
