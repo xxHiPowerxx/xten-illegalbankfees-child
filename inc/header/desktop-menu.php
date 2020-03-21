@@ -17,9 +17,6 @@ $style                     =
 		'font-family:' . $font . ';' .
 		'src: url(' . $root_dir . '/assets/fonts/' . $font . '/' . $font . '.ttf);' .
 	'}' .
-	'.main-navigation li,.xten-header{' .
-		'font-family:roboto,helvetica,arial,sans-serif;' .
-	'}' .
 	'@media (min-width:' . $mobile_menu_breakpoint . 'px ){' .
 		'.xten-standard-header .site-branding{' .
 			'margin-right:6rem;' .
