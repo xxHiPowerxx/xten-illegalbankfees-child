@@ -17,6 +17,53 @@
 .main-container {
 	padding-bottom: 6rem;
 }
+.header-wrapper {
+	.main-navigation {
+		> ul {
+			li {
+				a {
+					&:before {
+						background-image: none !important;
+						background-color: $secondary !important;
+						transform-origin: 0 0;
+					}
+				}
+				&.current-menu-item,
+				&.current_page_item {
+					> a {
+						&:before {
+							background-image: none !important;
+							background-color: $white !important;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.header-wrapper {
+	.site-header {
+		.navbar {
+			.header-container {
+				.main-navigation {
+					> ul {
+						li {
+							&.menu-type-flyout {
+								.sub-menu {
+									li {
+										a {
+											font-size: 1.8rem;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
 /*   Parent Theme Overrides   */
 
 /*   Blog Post/Home Page   */
@@ -26,6 +73,39 @@
 .color-secondary {
 	color: $secondary;
 }
+ul {
+	&.prominent {
+		list-style-type: none;
+		font-size: 3rem;
+		padding-left: 1.5em;
+		li {
+			position: relative;
+			&:before {
+				content: "";
+				position: absolute;
+				width: 0.5em;
+				height: 0.125em;
+				background-color: $primary;
+				left: -1em;
+				top: 50%;
+				transform: translate3d(0, -50%, 0);
+			}
+		}
+		a {
+			font-size: inherit;
+			text-decoration: none;
+			font-weight: 600;
+			transform: translate3d(0, 0, 0);
+			display: inline-block;
+			@extend .smooth-transition;
+			#{$active} {
+				transform: translate3d(0.25em, 0, 0);
+				text-shadow: 0.05em 0.05em 0.05em rgba(0, 0, 0, 0.15);
+			}
+		}
+	}
+}
+
 $weird-content-padding: 1.875rem;
 .entry-header {
 	.featured-image {
@@ -127,12 +207,12 @@ body {
 .btn {
 	@extend .smooth-transition;
 	&.btn-primary {
-		color: $secondary;
+		color: $white;
 		background-color: $primary;
 		border-color: $primary;
 		#{$active} {
 			color: $primary-darker;
-			background-color: $off-white;
+			background-color: $white;
 			border-color: $primary;
 			box-shadow: 0 0.2em 0.2em rgba($darker, 0.35);
 		}
@@ -145,7 +225,7 @@ body {
 		background: linear-gradient(to bottom, $primary 0%, $primary-darker 100%);
 		.site-info-footer-wrapper {
 			.site-info {
-				color: $off-white;
+				color: $white;
 				a {
 					color: inherit;
 					@extend .smooth-transition;
