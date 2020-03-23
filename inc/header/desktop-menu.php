@@ -77,6 +77,12 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 					<i class="fas fa-search"></i>
 				</button>
 			<?php	endif; ?>
+
+			<button id="mobile-nav-open" class="mobile-toggler collapsed" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle navigation" tabindex="0" data-target="#mobile-sidebar">
+				<div class="mobile-toggler-icon">
+					<i class="fas fa-bars"></i>
+				</div>
+			</button>
 		</div><!-- /.header-container -->
 	</div><!-- /#mainNav -->
 	<?php	if ( $main_nav_search ) : ?>
