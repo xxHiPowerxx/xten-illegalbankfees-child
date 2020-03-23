@@ -8,7 +8,8 @@
 #menu-wrapper {
 	&.xten-standard-internet-header {
 		.site-header {
-			&#masthead {
+			@at-root .mobile-sidebar-top,
+				& {
 				background-color: $primary;
 			}
 		}
@@ -34,6 +35,17 @@
 						&:before {
 							background-image: none !important;
 							background-color: $white !important;
+						}
+					}
+				}
+				> ul {
+					&.sub-nav {
+						background-color: $white !important;
+						a {
+							@extend .smooth-transition;
+							#{$active} {
+								background-color: $off-white !important;
+							}
 						}
 					}
 				}
@@ -113,7 +125,7 @@ $weird-content-padding: 1.875rem;
 		margin: (-$weird-content-padding) (-$weird-content-padding) 0;
 		overflow: hidden;
 		&:before {
-			@media (min-width: 420px) {
+			@media (min-width: $vp_sm) {
 				content: "";
 			}
 			display: block;
@@ -128,6 +140,20 @@ $weird-content-padding: 1.875rem;
 			min-height: 100%;
 			width: 100%;
 			max-width: none;
+			img {
+				min-height: 100%;
+				max-width: unset;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate3d(-50%, -50%, 0);
+				width: auto;
+				@media (min-width: $vp_sm) {
+					min-height: 0;
+					max-width: 100%;
+					width: auto;
+				}
+			}
 		}
 		.featured-image-mask {
 			color: $white;
@@ -147,7 +173,7 @@ $weird-content-padding: 1.875rem;
 			text-shadow: 0 0.05em 0.025em rgba(0, 0, 0, 0.35);
 			top: 0;
 			position: relative;
-			@media (min-width: 420px) {
+			@media (min-width: $vp_sm) {
 				position: absolute;
 			}
 		}
