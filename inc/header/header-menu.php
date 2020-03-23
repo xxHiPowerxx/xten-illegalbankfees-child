@@ -22,67 +22,64 @@ if ( $locations && isset( $locations[ $menu_name ] ) ) :
 	// Store result in variable to be later used to validate .mobile-navigation.
 ?>
 <div id="menu-wrapper" class="<?php echo esc_attr( $header_selection_class ); ?>" data-mobile-nav-breakpoint="<?php echo esc_attr( $mobile_nav_breakpoint ); ?>">
-	<div id="mobile-sidebar" class="mobile-sidebar mobile-sidebar-closed"> <!-- Mobile Nav -->
+	<div id="mobile-sidebar" class="mobile-sidebar"> <!-- Mobile Nav -->
 		<?php
 		$is_mobile_gobal_nav = true;
 
 		// Main Nav Mobile Accordion.
 		?>
-		<div class="primary-nav-wrapper">
-			<div class="primary-nav-trigger">
-				<div class="site-branding">
-					<?php	$home_url = esc_url( home_url( '/' ) ); ?>
-					<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
-						<div class="ctnr-custom-logo <?php echo file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ? 'child-logo' : ''; ?>">
-							<?php
-							if ( file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ) :
-								require get_stylesheet_directory() . '/header-logo.svg';
-							else :
-								$xten_header_logo_svg = $GLOBALS['xten-header-logo'];
-								echo $xten_header_logo_svg;
-								?>
-								<?php if ( $site_name ) : ?>
-									<span class="site-name"><?php echo esc_attr( $site_name ); ?> </span>
-								<?php endif; ?>
-								<?php
-							endif;
+		<div class="mobile-sidebar-top">
+			<div class="site-branding">
+				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
+				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
+					<div class="ctnr-custom-logo <?php echo file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ? 'child-logo' : ''; ?>">
+						<?php
+						if ( file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ) :
+							require get_stylesheet_directory() . '/header-logo.svg';
+						else :
+							$xten_header_logo_svg = $GLOBALS['xten-header-logo'];
+							echo $xten_header_logo_svg;
 							?>
-						</div>
-					</a>
-				</div><!-- .site-branding -->
-				<button class="btn mobile-main-nav-trigger mobile-nav-trigger" type="button" data-toggle="collapse" data-target="#mobile-main-navigation" aria-expanded="true" aria-controls="mobile-main-navigation">
-					<div><span>MENU</span></div> <i class="fa fa-chevron-down"></i>
-				</button>
-			</div>
-
-			<div class="mobile-main-navigation-wrapper">
-				<div class="collapse show" id="mobile-main-navigation">
-					<!-- Mobile Search -->
-					<div class="mobile-search">
-						<?php echo get_search_form(); ?>
+							<?php if ( $site_name ) : ?>
+								<span class="site-name"><?php echo esc_attr( $site_name ); ?> </span>
+							<?php endif; ?>
+							<?php
+						endif;
+						?>
 					</div>
-
-					<?php
-					// Primary Nav.
-					if ( $menu_items ) :
-							wp_nav_menu(
-								array(
-									'theme_location' => $menu_name,
-									'menu_id'        => 'mobile-menu',
-									'container'      => 'ul',
-									'depth'          => 2,
-									'walker'         => new XTen_Walker(),
-								)
-							);
-					endif;
-					// Close Main Nav Mobile Accordion.
-					?>
-
+				</a>
+			</div><!-- /.site-branding -->
+			<button id="mobile-nav-close" class="mobile-toggler" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle Navigation" tabindex="0">
+				<div class="mobile-toggler-icon">
+					<i class="fas fa-times"></i>
 				</div>
-			</div>
-		</div>
+			</button>
+		</div><!-- /.mobile-sidebar-top -->
+		<div class="mobile-main-navigation-wrapper">
+			<div class="collapse show" id="mobile-main-navigation">
+				<!-- Mobile Search -->
+				<div class="mobile-search">
+					<?php echo get_search_form(); ?>
+				</div>
 
-		<div class="mobile-translate"></div>
+				<?php
+				// Primary Nav.
+				if ( $menu_items ) :
+						wp_nav_menu(
+							array(
+								'theme_location' => $menu_name,
+								'menu_id'        => 'mobile-menu',
+								'container'      => 'ul',
+								'depth'          => 2,
+								'walker'         => new XTen_Walker(),
+							)
+						);
+				endif;
+				// Close Main Nav Mobile Accordion.
+				?>
+
+			</div>
+		</div><!-- .mobile-main-navigation-wrapper -->
 
 		<?php
 		// Bottom Widget in mobile menu.
