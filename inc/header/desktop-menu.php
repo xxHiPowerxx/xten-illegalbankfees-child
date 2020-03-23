@@ -9,7 +9,7 @@ wp_enqueue_style( 'xten-standard-header-css' );
 
 $global_xten_header_file = $GLOBALS['global_xten_header_file'];
 $site_name                 = $GLOBALS['department_name'];
-$mobile_menu_breakpoint    = $GLOBALS['mobile_menu_breakpoint'];
+$mobile_nav_breakpoint    = $GLOBALS['mobile_nav_breakpoint'];
 $root_dir                  = get_template_directory_uri();
 $font                      = 'roboto';
 $style                     =
@@ -17,7 +17,7 @@ $style                     =
 		'font-family:' . $font . ';' .
 		'src: url(' . $root_dir . '/assets/fonts/' . $font . '/' . $font . '.ttf);' .
 	'}' .
-	'@media (min-width:' . $mobile_menu_breakpoint . 'px ){' .
+	'@media (min-width:' . $mobile_nav_breakpoint . 'px ){' .
 		'.xten-standard-header .site-branding{' .
 			'margin-right:6rem;' .
 		'}' .

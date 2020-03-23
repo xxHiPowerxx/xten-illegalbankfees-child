@@ -7,7 +7,7 @@ $menu_items                = null;
 $standard_header_selection = $GLOBALS['internet_or_xtenline'];
 $header_selection_name     = str_replace( '_', '-', $standard_header_selection );
 $header_selection_class    = 'xten-' . $header_selection_name;
-$mobile_nav_breakpoint     = $GLOBALS['mobile_menu_breakpoint'];
+$mobile_nav_breakpoint     = $GLOBALS['mobile_nav_breakpoint'];
 
 
 if ( $locations && isset( $locations[ $menu_name ] ) ) :
