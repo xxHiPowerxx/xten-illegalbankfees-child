@@ -77,6 +77,18 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 					<i class="fas fa-search"></i>
 				</button>
 			<?php	endif; ?>
+			<?php
+			// Show Sidebar Modal Trigger.
+			if (
+				is_page_template( 'page-templates/page-with-sidebar-template.php' ) &&
+				is_active_sidebar( 'sidebar-1' )
+			) :
+				?>
+				<button id="show-sidebar-modal" data-toggle="modal" data-target="#sidebar-modal">
+					<span class="btn-icon fa fa-comment"></span>
+					<span class="btn-text">Connect</span>
+				</button>
+			<?php endif; ?>
 
 			<button id="mobile-nav-open" class="mobile-toggler collapsed" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle navigation" tabindex="0" data-target="#mobile-sidebar">
 				<div class="mobile-toggler-icon">
@@ -90,7 +102,7 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 			<div class="header-search-wrapper">
 				<div class="container">
 					<div class="row">
-						<div class=" col-sm-12 col-lg-8 offset-lg-2">
+						<div class=" col-sm-12 col-xl-8 offset-xl-2">
 							<?php echo get_search_form(); ?>
 						</div>
 					</div>
