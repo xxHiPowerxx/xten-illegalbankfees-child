@@ -10,7 +10,7 @@ get_header();
 $sidebar_location = get_theme_mod( 'sidebar_location', 'sidebar_right' );
 $column           = '';
 if ( 'none' !== $sidebar_location ) {
-	$column = '-lg-8';
+	$column = '-xl-8';
 };
 ?>
 <div class="sizeContent container container-ext main-container">
@@ -46,4 +46,5 @@ if ( 'none' !== $sidebar_location ) {
 </div> <!-- end sizeContent -->
 
 <?php
+include get_stylesheet_directory() . '/inc/sidebar-modal.php';
 get_footer();
