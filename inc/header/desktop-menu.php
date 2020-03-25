@@ -69,6 +69,9 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 			</nav><!-- #site-navigation -->
 			<?php
 
+			// Render Site Phone Number.
+			echo get_site_phone_number_func(true);
+
 			// Get Customizer Setting for Search Icon.
 			$main_nav_search = get_theme_mod( 'main_nav_search', true );
 			if ( $main_nav_search ) :
@@ -84,7 +87,7 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 				is_active_sidebar( 'sidebar-1' )
 			) :
 				?>
-				<button id="show-sidebar-modal" data-toggle="modal" data-target="#sidebar-modal">
+				<button id="show-sidebar-modal" data-toggle="modal" data-target="#sidebar-modal" type="button">
 					<span class="btn-icon fa fa-comment"></span>
 					<span class="btn-text">Connect</span>
 				</button>
