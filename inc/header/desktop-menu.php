@@ -70,7 +70,10 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 			<?php
 
 			// Render Site Phone Number.
-			echo get_site_phone_number_func(true);
+			$site_phone_number = get_theme_mod('site_phone_number', '');
+			if ( $site_phone_number !== '' ) :
+				echo get_site_phone_number_func(true);
+			endif;
 
 			// Get Customizer Setting for Search Icon.
 			$main_nav_search = get_theme_mod( 'main_nav_search', true );
