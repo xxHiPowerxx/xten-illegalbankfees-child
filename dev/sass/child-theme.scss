@@ -52,14 +52,16 @@
 			}
 		}
 	}
-}
-.header-wrapper {
 	.site-header {
 		.navbar {
 			.header-container {
 				.main-navigation {
 					> ul {
 						li {
+							margin-left: 0.75em;
+							a {
+								font-weight: 700;
+							}
 							&.menu-type-flyout {
 								.sub-menu {
 									li {
@@ -72,6 +74,56 @@
 						}
 					}
 				}
+			}
+		}
+	}
+}
+.site-header {
+	.header-container {
+		> * {
+			&:not(:last-child) {
+				&:not(.header-search-toggle) {
+					@at-root .xten-mobile-menu-inactive {
+						margin-right: 1.5rem;
+					}
+				}
+			}
+		}
+	}
+	.anchor-site-phone-number {
+		font-size: 2rem;
+		font-weight: 700;
+		color: $white;
+		text-decoration: none;
+		position: relative;
+		line-height: 1;
+		@at-root .xten-mobile-menu-active & {
+			font-size: 1.68rem;
+			max-width: 5.3em;
+			text-align: center;
+		}
+		.site-phone-number {
+			display: block;
+			padding: 0.5em;
+		}
+		&:before {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 0.1535rem;
+			bottom: 0.25rem;
+			left: 0;
+			right: 0;
+			transform: scaleX(0) translateZ(0);
+			backface-visibility: hidden;
+			transition: $smooth_transition;
+			background-color: $secondary;
+			transform-origin: 0 0;
+		}
+		#{$active} {
+			&:before {
+				transform: scaleX(1) translateZ(0);
 			}
 		}
 	}
@@ -106,7 +158,7 @@ ul {
 		a {
 			font-size: inherit;
 			text-decoration: none;
-			font-weight: 600;
+			font-weight: 700;
 			transform: translate3d(0, 0, 0);
 			display: inline-block;
 			@extend .smooth-transition;
@@ -262,13 +314,28 @@ body.xten-mobile-menu-active {
 	padding: 0.25em 0.5em;
 	display: none;
 	flex-direction: column;
+	align-items: center;
 	font-size: 2.8rem;
+	text-align: center;
 	@at-root body.xten-mobile-menu-active & {
 		display: flex;
 	}
 	.btn-text {
 		font-size: 0.6em;
-		font-weight: 600;
+		font-weight: 700;
+	}
+	.btn-icon {
+		@extend .smooth-transition;
+		transform: scale(1) translateZ(0);
+		backface-visibility: hidden;
+	}
+	#{$active} {
+		.btn-icon {
+			transform: scale(1.1) translateZ(0);
+		}
+	}
+	&:active {
+		outline: none;
 	}
 }
 /*   /Sidebar Modal   */
