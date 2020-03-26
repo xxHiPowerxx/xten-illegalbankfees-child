@@ -19,7 +19,7 @@
 						: $(".site-header")[0].getBoundingClientRect().height,
 					padding = 30,
 					scrollPosition = sideBarTop - siteHeaderHeight - padding;
-				$("html, body").animate({ scrollTop: scrollPosition });
+				$("html, body").animate({ scrollTop: scrollPosition }, 350);
 			}
 		}
 		function interceptHashChange() {
