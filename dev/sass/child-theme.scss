@@ -280,6 +280,31 @@ $weird-content-padding: 1.875rem;
 	input[type="number"] {
 		-moz-appearance: textfield;
 	}
+	.visible-only-if-valid {
+		display: none;
+		margin: 2em 0.5em 0;
+		padding: 0.2em 1em 0.5em;
+		border: 2px solid rgb(57, 143, 20);
+		border-bottom: 0;
+		a {
+			font-size: inherit;
+			font-weight: 700;
+		}
+	}
+	form {
+		&.sent {
+			.visible-only-if-valid {
+				display: block;
+				+ div {
+					&.wpcf7-response-output {
+						margin-top: 0;
+						border-top: 0;
+						padding-top: 0;
+					}
+				}
+			}
+		}
+	}
 }
 /*   /Contact Form   */
 
