@@ -25,6 +25,7 @@ $get_the_title = use_acf_field_h1() === '' ? get_the_title() : use_acf_field_h1(
 					<?php xten_post_thumbnail( array(957,536) ); ?>
 					<div class="featured-image-mask">
 						<h1 class="entry-title"><?php echo $get_the_title; ?></h1>
+						<button data-toggle="modal" data-target="#sidebar-modal" type="button" class="btn btn-theme-style theme-style-light xten-mobile-menu-inactive-hide xten-mobile-menu-active-show">See If You Qualify</button>
 					</div>
 				</div><!-- featured-image -->
 				<?php
