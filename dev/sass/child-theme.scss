@@ -309,11 +309,6 @@ $weird-content-padding: 1.875rem;
 /*   /Contact Form   */
 
 /*   Sidebar Modal   */
-body.xten-mobile-menu-active {
-	#right-sidebar {
-		display: none;
-	}
-}
 #sidebar-modal {
 	z-index: 8001;
 	.primary-sidebar {
