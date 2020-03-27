@@ -83,6 +83,7 @@
 		> * {
 			&:not(:last-child) {
 				&:not(.header-search-toggle) {
+					margin-right: 1.5%;
 					@at-root .xten-mobile-menu-inactive {
 						margin-right: 1.5rem;
 					}
@@ -401,31 +402,16 @@ $weird-content-padding: 1.875rem;
 }
 
 #show-sidebar-modal {
-	border: none;
-	background-color: transparent;
-	color: $white;
-	padding: 0.25em 0.5em;
 	display: none;
-	flex-direction: column;
-	align-items: center;
-	font-size: 2.8rem;
 	text-align: center;
+	font-weight: 700;
+	max-width: 5.6em;
+	font-size: 1.6rem;
+	@media (min-width: $vp_sm) {
+		font-size: 2.2rem;
+	}
 	@at-root body.xten-mobile-menu-active & {
-		display: flex;
-	}
-	.btn-text {
-		font-size: 0.6em;
-		font-weight: 700;
-	}
-	.btn-icon {
-		@extend .smooth-transition;
-		transform: scale(1) translateZ(0);
-		backface-visibility: hidden;
-	}
-	#{$active} {
-		.btn-icon {
-			transform: scale(1.1) translateZ(0);
-		}
+		display: block;
 	}
 	&:active {
 		outline: none;
@@ -454,7 +440,7 @@ body {
 		}
 	}
 	&.btn-theme-style {
-		&.theme-style-light {
+		&.theme-style-white {
 			color: $white;
 			border-color: $white;
 		}

@@ -93,8 +93,7 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 				is_active_sidebar( 'sidebar-1' )
 			) :
 				?>
-				<button id="show-sidebar-modal" data-toggle="modal" data-target="#sidebar-modal" type="button">
-					<span class="btn-icon fa fa-comment"></span>
+				<button class="btn btn-theme-style theme-style-white" id="show-sidebar-modal" data-toggle="modal" data-target="#sidebar-modal" type="button">
 					<span class="btn-text">Connect</span>
 				</button>
 			<?php endif; ?>
