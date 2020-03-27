@@ -86,7 +86,10 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 			<?php
 			// Show Sidebar Modal Trigger.
 			if (
-				is_page_template( 'page-templates/page-with-sidebar-template.php' ) &&
+				(
+					is_page_template( 'page-templates/page-with-sidebar-template.php' ) ||
+					is_singular()
+				) &&
 				is_active_sidebar( 'sidebar-1' )
 			) :
 				?>
