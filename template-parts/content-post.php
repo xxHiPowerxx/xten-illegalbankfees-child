@@ -11,7 +11,8 @@ function use_acf_field_h1() {
 	$h1 = wp_kses_post( get_field( 'page_heading_override', false, false ) );
 	return $h1;
 }
-$get_the_title = use_acf_field_h1() === '' ? get_the_title() : use_acf_field_h1();
+$get_the_title                  = use_acf_field_h1() === '' ? get_the_title() : use_acf_field_h1();
+$featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button_text') );
 
 ?>
 
@@ -25,7 +26,9 @@ $get_the_title = use_acf_field_h1() === '' ? get_the_title() : use_acf_field_h1(
 					<?php xten_post_thumbnail( array(957,536) ); ?>
 					<div class="featured-image-mask">
 						<h1 class="entry-title"><?php echo $get_the_title; ?></h1>
-						<button data-toggle="modal" data-target="#sidebar-modal" type="button" class="btn btn-theme-style theme-style-light xten-mobile-menu-inactive-hide xten-mobile-menu-active-show">See If You Qualify</button>
+						<?php if ( $featured_image_cta_button_text ) : ?>
+							<button data-toggle="modal" data-target="#sidebar-modal" type="button" class="btn btn-theme-style theme-style-light xten-mobile-menu-inactive-hide xten-mobile-menu-active-show"><?php echo $featured_image_cta_button_text; ?></button>
+						<?php endif; ?>
 					</div>
 				</div><!-- featured-image -->
 				<?php
@@ -96,8 +99,8 @@ $get_the_title = use_acf_field_h1() === '' ? get_the_title() : use_acf_field_h1(
 if ( is_singular() && ! is_page_template( 'page-templates/page-with-sidebar-template.php' ) ) :
 	the_post_navigation(
 		array(
-			'prev_text'          => __( '<i class="fas fa-arrow-left"></i> %title' ),
-			'next_text'          => __( '%title <i class="fas fa-arrow-right"></i>' ),
+			'prev_text'          => __( '<div class="nav-link-label">Previous Post</div><div class="nav-link-title"><i class="fas fa-arrow-left"></i> <span class="nav-title">%title</span></div>' ),
+			'next_text'          => __( '<div class="nav-link-label">Next Post</div><div class="nav-link-title"><span class="nav-title">%title</span> <i class="fas fa-arrow-right"></i></div>' ),
 			'screen_reader_text' => __( 'Posts navigation' ),
 		)
 	);

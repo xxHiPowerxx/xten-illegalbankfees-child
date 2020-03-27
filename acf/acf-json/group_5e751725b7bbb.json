@@ -1,6 +1,6 @@
 {
     "key": "group_5e751725b7bbb",
-    "title": "Page Heading",
+    "title": "Custom Page\/Post Attributes",
     "fields": [
         {
             "key": "field_5e7522ee4504a",
@@ -20,6 +20,25 @@
             "media_upload": 0,
             "toolbar": "full",
             "delay": 0
+        },
+        {
+            "key": "field_5e7d17ad4514b",
+            "label": "Featured Image CTA Button Text",
+            "name": "featured_image_cta_button_text",
+            "type": "text",
+            "instructions": "Text for the Call to Action Button that sits in the form when the Mobile Menu shows.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -46,5 +65,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1584737757
+    "modified": 1585256637
 }
