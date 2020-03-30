@@ -9,29 +9,49 @@
 					.prop("required", true);
 			});
 		}
-		function scrollToTarget() {
-			if ($("body").hasClass("xten-mobile-menu-active")) {
-				$("#sidebar-modal").modal("show");
-			} else {
-				var sideBarTop = $("#right-sidebar").position().top,
-					siteHeaderHeight = window.siteHeaderHeight
-						? parseFloat(window.siteHeaderHeight)
-						: $(".site-header")[0].getBoundingClientRect().height,
-					padding = 30,
-					scrollPosition = sideBarTop - siteHeaderHeight - padding;
-				$("html, body").animate({ scrollTop: scrollPosition }, 350);
-			}
+		function scrollToTarget($target) {
+			// Make sure $target is a jQuery object.
+			$target = $target instanceof jQuery ? $target : $($target);
+			var targetTop = $target.position().top,
+				siteHeaderHeight = window.siteHeaderHeight
+					? parseFloat(window.siteHeaderHeight)
+					: $(".site-header")[0].getBoundingClientRect().height,
+				padding = 30,
+				scrollPosition = targetTop - siteHeaderHeight - padding;
+			$("html, body").animate({ scrollTop: scrollPosition }, 350);
 		}
-		function interceptHashChange() {
+		function interceptHashChange($target = null) {
 			$(window).on("load hashchange", function(e) {
-				if (window.location.hash === "#contact-us") {
-					scrollToTarget();
+				if (window.location.hash && $(window.location.hash).length) {
+					$target = $target || $(window.location.hash);
+				}
+				if ($target !== null && $target.length) {
+					scrollToTarget($target);
 				}
 			});
 		}
 		function scrollToTargetOnClick() {
-			$('[href*="#contact-us"]').on("click", function() {
-				scrollToTarget();
+			$('[href*="#contact-us"]').on("click keyup", function(e) {
+				var key = e.key || e.keyCode;
+				if (key) {
+					var enterKey = key === "Enter" || key === 13;
+					var spaceKey = key === " " || key === 32;
+					if (!(enterKey || spaceKey)) {
+						return;
+					}
+				}
+				e.stopImmediatePropagation();
+				e.preventDefault();
+				if ($("body").hasClass("xten-mobile-menu-active")) {
+					$("#sidebar-modal").modal("show");
+				} else {
+					history.replaceState(
+						null,
+						null,
+						document.location.pathname + $(this).attr("href")
+					);
+					scrollToTarget($("#right-sidebar"));
+				}
 			});
 		}
 		function initScrollToTarget() {
