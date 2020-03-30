@@ -84,7 +84,7 @@
 			&:not(:last-child) {
 				&:not(.header-search-toggle) {
 					margin-right: 1.5%;
-					@at-root .xten-mobile-menu-inactive {
+					@at-root .xten-mobile-menu-inactive & {
 						margin-right: 1.5rem;
 					}
 				}
@@ -124,7 +124,7 @@
 			right: 0;
 			transform: scaleX(0) translateZ(0);
 			backface-visibility: hidden;
-			transition: $smooth_transition;
+			transition: $smooth-transition;
 			background-color: $secondary;
 			transform-origin: 0 0;
 		}
@@ -204,6 +204,45 @@ html {
 }
 /*   Mobile Menu   */
 /*   Parent Theme Overrides   */
+
+/*   Custom Logo SVG   */
+.custom-logo-link {
+	.custom-logo {
+		&,
+		* {
+			transition: $smooth-transition;
+		}
+	}
+	#{$active} {
+		.custom-logo {
+			filter: drop-shadow(0 0.1em 0.1em rgba($darker, 0.55));
+			[style*="fill"] {
+				&[style*="fff"] {
+					fill: $primary-darker !important;
+					&:last-child {
+						stroke: $white;
+					}
+				}
+			}
+			[style*="fill:none"] {
+				&[style*="stroke"] {
+					stroke: $primary-darker !important;
+					fill: $white !important;
+				}
+			}
+		}
+	}
+	[style*="fill"] {
+		&[style*="fff"] {
+			&:last-child {
+				stroke-miterlimit: 10;
+				stroke-width: 0.1em;
+				stroke: transparent;
+			}
+		}
+	}
+}
+/*   /Custom Logo SVG   */
 
 /*   Blog Post/Home Page   */
 .color-primary {
@@ -440,6 +479,20 @@ body {
 		}
 	}
 	&.btn-theme-style {
+		background-color: transparent;
+		#{$active} {
+			&.theme-style-white {
+				background-color: $white;
+				color: $primary-dark;
+				border-color: $primary-dark;
+			}
+			&.theme-style-dark {
+				background-color: $primary-dark;
+				color: $white;
+				border-color: $white;
+			}
+			box-shadow: 0 0.3em 0.3em rgba($darker, 0.55);
+		}
 		&.theme-style-white {
 			color: $white;
 			border-color: $white;
