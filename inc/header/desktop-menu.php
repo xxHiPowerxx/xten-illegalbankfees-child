@@ -83,21 +83,9 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 					<i class="fas fa-search"></i>
 				</button>
 			<?php	endif; ?>
-			<?php
-			// Show Sidebar Modal Trigger.
-			if (
-				(
-					is_page_template( 'page-templates/page-with-sidebar-template.php' ) ||
-					is_singular()
-				) &&
-				is_active_sidebar( 'sidebar-1' )
-			) :
-				?>
-				<button class="btn btn-theme-style theme-style-white" id="show-sidebar-modal" data-toggle="modal" data-target="#sidebar-modal" type="button">
-					<span class="btn-text">Connect</span>
-				</button>
-			<?php endif; ?>
-
+			<button class="btn btn-theme-style theme-style-white" id="show-sidebar-modal" data-toggle="modal" data-target="#sidebar-modal" type="button">
+				<span class="btn-text">Connect</span>
+			</button>
 			<button id="mobile-nav-open" class="mobile-toggler collapsed" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle navigation" tabindex="0" data-target="#mobile-sidebar">
 				<div class="mobile-toggler-icon">
 					<i class="fas fa-bars"></i>

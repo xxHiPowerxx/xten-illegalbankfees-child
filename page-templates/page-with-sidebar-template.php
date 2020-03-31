@@ -46,5 +46,4 @@ if ( 'none' !== $sidebar_location ) {
 </div> <!-- end sizeContent -->
 
 <?php
-include get_stylesheet_directory() . '/inc/sidebar-modal.php';
 get_footer();
