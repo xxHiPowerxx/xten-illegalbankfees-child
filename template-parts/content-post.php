@@ -99,8 +99,8 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 if ( is_singular() && ! is_page_template( 'page-templates/page-with-sidebar-template.php' ) ) :
 	the_post_navigation(
 		array(
-			'prev_text'          => __( '<div class="nav-link-label">Previous Post</div><div class="nav-link-title"><i class="fas fa-arrow-left"></i> <span class="nav-title">%title</span></div>' ),
-			'next_text'          => __( '<div class="nav-link-label">Next Post</div><div class="nav-link-title"><span class="nav-title">%title</span> <i class="fas fa-arrow-right"></i></div>' ),
+			'prev_text'          => __( '<div class="nav-link-label"><i class="nav-link-label-icon fas fa-arrow-left"></i> <span class="nav-link-label-text">Previous Post</span></div><div class="ctnr-nav-title"><span class="nav-title">%title</span></div>' ),
+			'next_text'          => __( '<div class="nav-link-label"><span class="nav-link-label-text">Next Post</span> <i class="nav-link-label-icon fas fa-arrow-right"></i></div><div class="ctnr-nav-title"><span class="nav-title">%title</span></div>' ),
 			'screen_reader_text' => __( 'Posts navigation' ),
 		)
 	);
