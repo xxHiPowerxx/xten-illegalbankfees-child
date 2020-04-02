@@ -97,7 +97,7 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 
 <?php
 if ( is_singular() && ! is_page_template( 'page-templates/page-with-sidebar-template.php' ) ) :
-	$post_type_name = esc_attr( get_post_type_object( get_post_type() )->labels->name );
+	$post_type_name = esc_attr( get_post_type_object( get_post_type() )->labels->singular_name );
 	the_post_navigation(
 		array(
 			'prev_text'          => __( '<div class="nav-link-label"><i class="nav-link-label-icon fas fa-arrow-left"></i> <span class="nav-link-label-text">Previous ' . $post_type_name . '</span></div><div class="ctnr-nav-title"><span class="nav-title">%title</span></div>' ),
