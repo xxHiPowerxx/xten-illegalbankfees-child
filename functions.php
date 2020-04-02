@@ -64,6 +64,13 @@ if ( file_exists( $save_acf_fields ) ) {
 add_filter('wpcf7_autop_or_not', '__return_false');
 
 /**
+ * Custom Post Types.
+ */
+require get_stylesheet_directory() . '/inc/custom-post-types.php';
+
+
+
+/**
  * Inline Styles.
  */
 // require get_stylesheet_directory() . '/inc/xten-child-inline-styles.php';
@@ -93,7 +100,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <?php
-} 
+}
 
 
 ?>
