@@ -54,11 +54,23 @@ function child_acf_json_load_point( $paths ) {
 
 }
 
-// Check to see if xten Save fields file exsists and adds save point if it does.
-$save_acf_fields = get_stylesheet_directory() . '/acf/save-acf-fields.php';
-if ( file_exists( $save_acf_fields ) ) {
-	require $save_acf_fields;
+/**
+ * Get Option from Site Settings Page and save ACF to Child if Set.
+ * Check to see if xten Save fields file exsists and adds save point if it does.
+ * 
+ */
+function save_acf_fields_to_child_theme() {
+	$save_acf_fields_to_child_theme = get_field('save_acf_fields_to_child_theme', 'options');
+	// If not set, default to true.
+	$save_acf_fields_to_child_theme = $save_acf_fields_to_child_theme !== null ? $save_acf_fields_to_child_theme : true;
+	if ( $save_acf_fields_to_child_theme ) :
+		$save_acf_fields = get_stylesheet_directory() . '/acf/save-acf-fields.php';
+		if ( file_exists( $save_acf_fields ) ) {
+			require $save_acf_fields;
+		}
+	endif;
 }
+add_action( 'wp_loaded', 'save_acf_fields_to_child_theme' );
 
 /* for Contact-Form-7 */
 add_filter('wpcf7_autop_or_not', '__return_false');

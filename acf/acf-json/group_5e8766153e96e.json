@@ -1,0 +1,43 @@
+{
+    "key": "group_5e8766153e96e",
+    "title": "Child Theme Site Settings",
+    "fields": [
+        {
+            "key": "field_5e87661deaed5",
+            "label": "Save ACF Field Groups to Child Theme?",
+            "name": "save_acf_fields_to_child_theme",
+            "type": "true_false",
+            "instructions": "Select Whether to save ACF Field Groups to Child Theme or Parent Theme.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "setting",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "site-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1585932495
+}
