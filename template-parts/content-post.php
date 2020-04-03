@@ -87,6 +87,7 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 
 	<footer class="entry-footer xten-highlight-font">
 		<div class="post-category">
+			<h5 class="post-category-title">Category:</h5>
 			<?php xten_post_categories(); ?>
 		</div><!-- .post-category -->
 		<?php
@@ -96,7 +97,10 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 </article><!-- #post-<?php the_ID(); ?> -->
 
 <?php
-if ( is_singular() && ! is_page_template( 'page-templates/page-with-sidebar-template.php' ) ) :
+if (
+	is_singular() &&
+	! is_page_template( 'page-templates/page-with-sidebar-template.php' ) 
+) :
 	$post_type_name = esc_attr( get_post_type_object( get_post_type() )->labels->singular_name );
 	the_post_navigation(
 		array(
