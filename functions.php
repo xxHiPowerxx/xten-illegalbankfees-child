@@ -63,7 +63,14 @@ function save_acf_fields_to_child_theme() {
 	$save_acf_fields_to_child_theme = get_field('save_acf_fields_to_child_theme', 'options');
 	// If not set, default to true.
 	$save_acf_fields_to_child_theme = $save_acf_fields_to_child_theme !== null ? $save_acf_fields_to_child_theme : true;
-	if ( $save_acf_fields_to_child_theme ) :
+	$select_where_to_save_acf_field_groups = get_field('select_where_to_save_acf_field_groups', 'options');
+	if (
+		$select_where_to_save_acf_field_groups === 'child' ||
+		(
+			$select_where_to_save_acf_field_groups === null &&
+			$save_acf_fields_to_child_theme
+		)
+	) :
 		$save_acf_fields = get_stylesheet_directory() . '/acf/save-acf-fields.php';
 		if ( file_exists( $save_acf_fields ) ) {
 			require $save_acf_fields;
