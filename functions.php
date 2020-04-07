@@ -70,7 +70,7 @@ function save_acf_fields_to_child_theme() {
 		}
 	endif;
 }
-add_action( 'wp_loaded', 'save_acf_fields_to_child_theme' );
+add_action( 'acf/init', 'save_acf_fields_to_child_theme' );
 
 /* for Contact-Form-7 */
 add_filter('wpcf7_autop_or_not', '__return_false');
