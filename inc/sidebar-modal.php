@@ -7,7 +7,7 @@
 
 ?>
 <div class="modal fade" id="sidebar-modal" tabindex="-1" role="dialog" aria-labelledby="Contact Form" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">×</span>
