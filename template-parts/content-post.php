@@ -46,9 +46,7 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 					endif;
 					?>
 					<div class="post-date">
-						<?php
-							xten_posted_on();
-						?>
+						<?php echo xten_posted_on(); ?>
 					</div><!-- .post-date -->
 				</div><!-- .entry-meta -->
 				<?php
