@@ -101,8 +101,7 @@
 		text-decoration: none;
 		position: relative;
 		line-height: 1;
-		@at-root .xten-mobile-menu-active
-				& {
+		@at-root .xten-mobile-menu-active & {
 			max-width: 5.6em;
 			font-size: 1.68rem;
 			@media (min-width: $vp_sm) {
@@ -697,3 +696,14 @@ body {
 	}
 }
 /*   /Footer    */
+
+/*   XTen Sections Overrides   */
+@media ( max-width: 430px ) {
+	.container-xten-section-hero {
+		background-color: rgba(0, 0, 0, 0.5);
+		.xten-content {
+			background-color: transparent !important;
+		}
+	}
+}
+/*   /XTen Sections Overrides   */
