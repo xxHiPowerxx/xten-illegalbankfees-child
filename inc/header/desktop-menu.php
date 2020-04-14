@@ -32,20 +32,8 @@ wp_add_inline_style( 'xten-standard-header-inline-style', $style );
 			<div class="site-branding">
 				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
 				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
-					<div class="ctnr-custom-logo <?php echo file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ? 'child-logo' : ''; ?>">
-						<?php
-						if ( file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ) :
-							require get_stylesheet_directory() . '/header-logo.svg';
-						else :
-							$xten_header_logo_svg = $GLOBALS['xten-header-logo'];
-							echo $xten_header_logo_svg;
-							?>
-							<?php if ( $site_name ) : ?>
-								<span class="site-name"><?php echo esc_attr( $site_name ); ?> </span>
-							<?php endif; ?>
-							<?php
-						endif;
-						?>
+					<div class="ctnr-custom-logo <?php echo $GLOBALS['xten-using-child-logo'] ? 'child-logo' : ''; ?>">
+						<?php echo $GLOBALS['xten-site-logo'] ?>
 					</div>
 				</a>
 			</div><!-- .site-branding -->
