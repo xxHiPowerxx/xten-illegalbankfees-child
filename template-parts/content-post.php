@@ -84,11 +84,13 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer xten-highlight-font">
-		<div class="post-category">
-			<h5 class="post-category-title">Category:</h5>
-			<?php xten_post_categories(); ?>
-		</div><!-- .post-category -->
-		<?php
+		<?php if ( ! empty( get_the_category_list() ) ) : ?>
+			<div class="post-category">
+				<h5 class="post-category-title">Category:</h5>
+				<?php xten_post_categories(); ?>
+			</div><!-- .post-category -->
+			<?php
+			endif; // endif ( ! empty( get_the_category_list() ) ) :
 		xten_edit_post_link();
 		?>
 	</footer><!-- .entry-footer -->
