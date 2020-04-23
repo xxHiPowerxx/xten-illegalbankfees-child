@@ -20,6 +20,49 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5ea1bfd0167e3",
+            "label": "Include Description in Invesitgations Archive",
+            "name": "include_description_in_invesitgations_archive",
+            "type": "true_false",
+            "instructions": "Select Whether to include the description in the displayed Investigation Posts or not.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5ea1c3411f8ff",
+            "label": "Investigations Archive Thumbnail",
+            "name": "investigations_thumbnail",
+            "type": "image",
+            "instructions": "Shows on Investigations Archive Page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         }
     ],
     "location": [
@@ -39,5 +82,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585932495
+    "modified": 1587659744
 }
