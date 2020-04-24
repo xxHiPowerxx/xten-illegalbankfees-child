@@ -121,5 +121,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <?php
 }
 
-
-?>
+/**
+ * Require Widgets File for custom widgets.
+ */
+require get_stylesheet_directory() . '/inc/widgets.php';
