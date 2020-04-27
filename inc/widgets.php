@@ -74,7 +74,10 @@ class contact_forms_widget extends WP_Widget {
 			$page_category_id = get_the_category()[0]->term_id;
 			foreach ( $contact_form_category_repeater as $contact_form ) :
 				$form_categories   = $contact_form['category'];
-				$matching_category = array_search( $page_category_id, $form_categories );
+				$matching_category = null;
+				if ( $form_categories ) :
+					$matching_category = array_search( $page_category_id, $form_categories );
+				endif;
 				if ( $matching_category !== false && $found_category === false ) :
 					$found_contact_form = $contact_form;
 					$found_category     = true;
