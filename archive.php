@@ -38,7 +38,7 @@ get_header(); ?>
 					if ( $is_category || $is_custom_post_type ) :
 						if ( ! function_exists( 'use_acf_field_h1' ) ) :
 							function use_acf_field_h1() {
-								$h1 = wp_kses_post( get_field( 'page_heading_override', false, false ) );
+								$h1 = wp_kses_post( get_field( 'page_heading_override', get_queried_object(), false ) );
 								return $h1;
 							}
 						endif;
