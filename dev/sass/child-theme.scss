@@ -383,15 +383,14 @@ ul {
 
 $weird-content-padding: 1.875rem;
 .entry-header {
+	&:not(.no-description) {
+		.featured-image {
+			margin-bottom: 0;
+		}
+	}
 	.featured-image {
 		position: relative;
-		margin: (
-				-$weird-content-padding
-			)
-			(
-				-$weird-content-padding
-			)
-			0;
+		margin: -$weird-content-padding;
 		overflow: hidden;
 		&:before {
 			@at-root body.xten-mobile-menu-inactive
