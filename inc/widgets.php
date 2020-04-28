@@ -67,22 +67,20 @@ class contact_forms_widget extends WP_Widget {
 		// Get Contact Form requested.
 		$get_field_param                = 'widget_' . $widget_id;
 		$contact_form_category_repeater = get_field( 'contact_form_category_repeater', $get_field_param );
-		// var_dump($contact_form_category_repeater);
 
 		if ( isset( $contact_form_category_repeater ) ) :
-			$found_category   = false;
 			$page_category_id = get_the_category()[0]->term_id;
+			// Set First Associated Contact Form as Default.
+			$found_contact_form = $contact_form_category_repeater[0];
+			// Then Loop through and find Correct Associated Contact Form if exists.
 			foreach ( $contact_form_category_repeater as $contact_form ) :
 				$form_categories   = $contact_form['category'];
-				$matching_category = null;
 				if ( $form_categories ) :
 					$matching_category = array_search( $page_category_id, $form_categories );
 				endif;
-				if ( $matching_category !== false && $found_category === false ) :
+				if ( $matching_category !== false ) :
 					$found_contact_form = $contact_form;
-					$found_category     = true;
-				else : // no matching category, fallback to first contact form.
-					$found_contact_form = $contact_form_category_repeater[0];
+					break; // Stop the loop.
 				endif;
 			endforeach; // endforeach ( $contact_form_category_repeater as $contact_form ) :
 			$used_contact_form   = $found_contact_form['contact_form'];
