@@ -1,0 +1,86 @@
+{
+    "key": "group_5ea9bbd7a63cc",
+    "title": "Investigations Settings",
+    "fields": [
+        {
+            "key": "field_5ea9bc291945d",
+            "label": "Include Description in Invesitgations Posts",
+            "name": "include_description_in_invesitgations_posts",
+            "type": "true_false",
+            "instructions": "Select Whether to include the description in the displayed Investigation Posts or not.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5ea9bcd91945e",
+            "label": "Investigations Archive Thumbnail",
+            "name": "investigations_thumbnail",
+            "type": "image",
+            "instructions": "Shows on Investigations Archive Page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5ea9c26d2d974",
+            "label": "Investigations Description",
+            "name": "investigations_description",
+            "type": "wysiwyg",
+            "instructions": "Description for The Investigations Custom Post Type, which will display on the Investigations Post-Archive Page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-investigations-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1588184615
+}
