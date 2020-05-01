@@ -57,7 +57,7 @@
 		// Only exclude description if setting is NOT set to false.
 		// It could be null or true otherwise.
 		if ( get_post_type() === 'investigations' ) :
-			$include_description = get_field( 'include_description_in_invesitgations_archive', 'option' );
+			$include_description = get_field( 'include_description_in_invesitgations_posts', 'option' );
 		else :
 			global $include_description;
 		endif;
