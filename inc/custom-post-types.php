@@ -21,7 +21,8 @@ function custom_post_types() {
 		$post_plural      = null,
 		$post_description = null,
 		$hierarchical     = false,
-		$icon             = 'admin-post'
+		$icon             = 'admin-post',
+		$settings_page    = false
 	) {
 		$post_plural      = $post_plural === null ?
 												$post_singular . 's' :
@@ -89,19 +90,37 @@ function custom_post_types() {
 															 	'slug'       => $post_handle,
 															 	'with_front' => false,
 															 ),
-		);
+		); // /$args;
+		
+		/**
+		 * Create Custom Options Page for Post Type.
+		 */
+		if ( $settings_page || function_exists( 'acf_add_options_page' ) ) :
+			acf_add_options_sub_page(
+				array(
+					'page_title'  => $post_plural . ' Settings',
+					'menu_title'  => $post_plural . ' Settings',
+					'parent_slug' => 'edit.php?post_type=' . $post_handle,
+				)
+			);
+		endif;
+
 		// Registering your Custom Post Type
 		return register_post_type( $post_handle, $args );
 	}
+
+	// Get ACF Field created for Investigation Descriptions.
+	$investigation_description = get_field( 'investigations_description', 'option' ) ? : 'Investigations of Banks, Organizations, etc...';
 	// Use our utility function to render different Custom Post Types.
 	create_custom_post_type( 
 		'Investigation',
 		null,
-		'Investigations of Banks, Organizations, etc...',
+		$investigation_description,
 		false,
-		'search'
+		'search',
+		true
 	);
-	
+
 }
 	 
 	/**
