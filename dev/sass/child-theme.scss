@@ -558,7 +558,10 @@ $weird-content-padding: 1.875rem;
 	.close {
 		padding: 0.25em
 			0.5em;
-		font-size: 3rem;
+		font-size: 2.4rem;
+		@media ( min-width: $vp_xl ) {
+			font-size: 3rem;
+		}
 		position: absolute;
 		background-color: $white;
 		right: 1.5rem;
@@ -704,6 +707,24 @@ body {
 .archive-description {
 	hr {
 		font-size: 1rem;
+	}
+}
+.xten-section-hero {
+	.xten-content {
+		text-align: center;
+		> :not(:last-child) {
+			margin-bottom: 3rem;
+		}
+		.entry-title {
+			line-height: 1.1;
+		}
+		.entry-subtitle {
+			font-size: 2.6rem;
+			font-weight: 500;
+			@media( min-width: $vp_xs ) {
+				font-size: 4.2rem;
+			}
+		}
 	}
 }
 /*   /XTen Sections Overrides   */
