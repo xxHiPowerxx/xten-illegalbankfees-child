@@ -105,9 +105,13 @@ get_header(); ?>
 					 */
 					if ( $is_category ) :
 
-						get_template_part( 'archive-category' );
+						get_template_part( 'template-parts/archive-category' );
 
-					else : // else if ( ! $is_category ) :
+					elseif ( $is_custom_post_type ) :
+
+						get_template_part( 'template-parts/archive-custom-post-type' );
+
+					else : // else if ( ! $is_category || ! $is_custom_post_type ) :
 
 						if ( have_posts() ) :
 							?>
