@@ -381,7 +381,7 @@ ul {
 	}
 }
 
-$weird-content-padding: 1.875rem;
+$weird-content-padding: 1.5rem;
 .entry-header {
 	&:not(.no-description) {
 		.featured-image {
@@ -709,10 +709,10 @@ body {
 .xten-section-hero .xten-content,
 .entry-header .featured-image-mask-inner {
 	text-align: center;
-	> :last-child {
+	> * {
 		margin-bottom: 0;
 	}
-	> :not(:last-child) {
+	> :not(:first-child) {
 		margin-top: 3rem;
 	}
 	> :first-child {
