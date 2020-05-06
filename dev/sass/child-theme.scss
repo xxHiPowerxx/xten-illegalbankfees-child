@@ -430,7 +430,7 @@ $weird-content-padding: 1.875rem;
 		}
 		.featured-image-mask {
 			color: $white;
-			padding: $weird-content-padding;
+			padding: 3rem $weird-content-padding;
 			width: 100%;
 			margin-bottom: 0;
 			display: flex;
@@ -657,12 +657,12 @@ body {
 			0.25em
 			0
 			0.25em;
-		@at-root .featured-image-mask
-				& {
-			margin-top: 1em;
-			font-size: 3rem;
-			margin-bottom: auto;
-		}
+	}
+	@at-root .featured-image-mask	& {
+		margin-top: 1em;
+		font-size: 3rem;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 /*   Footer    */
@@ -707,20 +707,22 @@ body {
 	}
 }
 .xten-section-hero .xten-content,
-.entry-header .featured-image-mask {
+.entry-header .featured-image-mask-inner {
 	text-align: center;
 	> :last-child {
 		margin-bottom: 0;
 	}
-	> :first-child {
-		margin-top: 0;
-	}
 	> :not(:last-child) {
 		margin-top: 3rem;
 	}
+	> :first-child {
+		margin-top: 0;
+	}
+	h1,
 	.entry-title {
 		line-height: 1.1;
 	}
+	h2,
 	.entry-subtitle {
 		font-size: 2.6rem;
 		font-weight: 500;
