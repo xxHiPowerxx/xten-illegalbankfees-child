@@ -38,12 +38,14 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 				<div class="featured-image">
 					<?php xten_post_thumbnail( array(957,536) ); ?>
 					<div class="featured-image-mask">
-						<?php
-						echo $get_the_title;
-						if ( $featured_image_cta_button_text ) :
-							?>
-							<button data-toggle="modal" data-target="#sidebar-modal" type="button" class="btn btn-theme-style theme-style-white xten-mobile-menu-inactive-hide xten-mobile-menu-active-show"><?php echo $featured_image_cta_button_text; ?></button>
-						<?php endif; ?>
+						<div class="featured-image-mask-inner">
+							<?php
+							echo $get_the_title;
+							if ( $featured_image_cta_button_text ) :
+								?>
+								<button data-toggle="modal" data-target="#sidebar-modal" type="button" class="btn btn-theme-style theme-style-white xten-mobile-menu-inactive-hide xten-mobile-menu-active-show"><?php echo $featured_image_cta_button_text; ?></button>
+							<?php endif; ?>
+						</div>
 					</div>
 				</div><!-- featured-image -->
 				<?php

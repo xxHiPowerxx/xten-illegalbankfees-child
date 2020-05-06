@@ -75,7 +75,9 @@ get_header(); ?>
 										<?php echo $thumbnail_img; ?>
 									</div>
 									<div class="featured-image-mask">
-										<h1 class="page-title entry-title"><?php echo $get_the_title; ?></h1>
+										<div class="featured-image-mask-inner">
+											<h1 class="page-title entry-title"><?php echo $get_the_title; ?></h1>
+										</div>
 									</div>
 								</div><!-- featured-image -->
 							<?php
