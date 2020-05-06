@@ -1,0 +1,77 @@
+{
+    "key": "group_5eb1fcde84d73",
+    "title": "Child-Theme Category Settings",
+    "fields": [
+        {
+            "key": "field_5eb1fd3eb1c69",
+            "label": "Child-Theme Settings",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5eb1fcdea3a60",
+            "label": "Default Category Description",
+            "name": "default_category_description",
+            "type": "wysiwyg",
+            "instructions": "This Description will be used for each Investigation that falls into this category.\r\nThis will support variables:\r\n${title} = \"Investigation Title\".\r\nNote: If there is more than one category it will pull from the most recent.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_5eb1fcdea3d29",
+            "label": "Advanced Accordion Endpoint",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 1,
+            "multi_expand": 0,
+            "endpoint": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1588723050
+}
