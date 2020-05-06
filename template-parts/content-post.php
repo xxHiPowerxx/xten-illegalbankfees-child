@@ -7,11 +7,24 @@
  * @package xten
  */
 
-function use_acf_field_h1() {
-	$h1 = wp_kses_post( get_field( 'page_heading_override', false, false ) );
-	return $h1;
-}
-$get_the_title                  = use_acf_field_h1() === '' ? get_the_title() : use_acf_field_h1();
+$get_the_title = wp_kses_post( get_field( 'page_heading_override', false, false ) );
+if ( ! $get_the_title ) :
+	$title    = get_the_title();
+	$post_categories = get_the_category();
+	foreach ( $post_categories as $post_category ) :
+		$default_category_description = wp_kses_post( get_field( 'default_category_description', $post_category, false ) );
+		if ($default_category_description) :
+			break;
+		endif;
+
+	endforeach;
+	$get_the_title = $default_category_description;
+	$get_the_title = str_replace('${title}', $title, $get_the_title );
+endif;
+if ( ! $get_the_title ) :
+	$get_the_title = '<h1 class="entry-title">' . get_the_title() . '</h1>';
+endif;
+
 $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button_text') );
 
 ?>
@@ -25,8 +38,10 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 				<div class="featured-image">
 					<?php xten_post_thumbnail( array(957,536) ); ?>
 					<div class="featured-image-mask">
-						<h1 class="entry-title"><?php echo $get_the_title; ?></h1>
-						<?php if ( $featured_image_cta_button_text ) : ?>
+						<?php
+						echo $get_the_title;
+						if ( $featured_image_cta_button_text ) :
+							?>
 							<button data-toggle="modal" data-target="#sidebar-modal" type="button" class="btn btn-theme-style theme-style-white xten-mobile-menu-inactive-hide xten-mobile-menu-active-show"><?php echo $featured_image_cta_button_text; ?></button>
 						<?php endif; ?>
 					</div>
