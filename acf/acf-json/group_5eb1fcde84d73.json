@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "open": 0,
+            "open": 1,
             "multi_expand": 0,
             "endpoint": 0
         },
@@ -40,7 +40,7 @@
         },
         {
             "key": "field_5eb1fcdea3d29",
-            "label": "Advanced Accordion Endpoint",
+            "label": "Child-Theme Settings Accordion Endpoint",
             "name": "",
             "type": "accordion",
             "instructions": "",
@@ -73,5 +73,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1588723050
+    "modified": 1588788202
 }
