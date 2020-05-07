@@ -12,13 +12,13 @@ if ( ! $get_the_title ) :
 	$title    = get_the_title();
 	$post_categories = get_the_category();
 	foreach ( $post_categories as $post_category ) :
-		$default_category_description = wp_kses_post( get_field( 'default_category_description', $post_category, false ) );
-		if ($default_category_description) :
+		$default_investigation_description = wp_kses_post( get_field( 'default_investigation_description', $post_category, false ) );
+		if ($default_investigation_description) :
 			break;
 		endif;
 
 	endforeach;
-	$get_the_title = $default_category_description;
+	$get_the_title = $default_investigation_description;
 	$get_the_title = str_replace('${title}', $title, $get_the_title );
 endif;
 if ( ! $get_the_title ) :

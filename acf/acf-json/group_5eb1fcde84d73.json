@@ -21,8 +21,8 @@
         },
         {
             "key": "field_5eb1fcdea3a60",
-            "label": "Default Category Description",
-            "name": "default_category_description",
+            "label": "Default Investigation Description",
+            "name": "default_investigation_description",
             "type": "wysiwyg",
             "instructions": "This Description will be used for each Investigation that falls into this category.\r\nThis will support variables:\r\n${title} = \"Investigation Title\".\r\nNote: If there is more than one category it will pull from the most recent.",
             "required": 0,
@@ -73,5 +73,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1588788202
+    "modified": 1588889303
 }
