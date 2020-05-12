@@ -64,31 +64,40 @@ class contact_forms_widget extends WP_Widget {
 			echo $args['before_title'] . $title . $args['after_title'];
 		endif;
 
+		// Get Page Contact Form Override if exists.
+		$contact_form_override          = get_field( 'contact_form_override' );
 		// Get Contact Form requested.
 		$get_field_param                = 'widget_' . $widget_id;
 		$contact_form_category_repeater = get_field( 'contact_form_category_repeater', $get_field_param );
 
-		if ( isset( $contact_form_category_repeater ) ) :
-			$page_category_id = get_the_category()[0]->term_id;
-			// Set First Associated Contact Form as Default.
-			$found_contact_form = $contact_form_category_repeater[0];
-			// Then Loop through and find Correct Associated Contact Form if exists.
-			foreach ( $contact_form_category_repeater as $contact_form ) :
-				$form_categories   = $contact_form['category'];
-				if ( $form_categories ) :
-					$matching_category = array_search( $page_category_id, $form_categories );
-				endif;
-				if ( $matching_category !== false ) :
-					$found_contact_form = $contact_form;
-					break; // Stop the loop.
-				endif;
-			endforeach; // endforeach ( $contact_form_category_repeater as $contact_form ) :
-			$used_contact_form   = $found_contact_form['contact_form'];
+		if ( $contact_form_override || isset( $contact_form_category_repeater ) ) :
+			if ( $contact_form_override ) :
+				// $used_contact_form is the contact form that we will actually use.
+				$used_contact_form = $contact_form_override;
+			elseif ( isset( $contact_form_category_repeater ) ) : // if ( ! $contact_form_override ) :
+				// If we are using the Repeater in the widget,
+				// we need to Find the Correct Associated Contact Form.
+				$page_category_id = get_the_category()[0]->term_id;
+				// Set First Associated Contact Form as Default.
+				$found_contact_form = $contact_form_category_repeater[0];
+				// Then Loop through and find Correct Associated Contact Form if exists.
+				foreach ( $contact_form_category_repeater as $contact_form ) :
+					$form_categories = $contact_form['category'];
+					if ( $form_categories ) :
+						$matching_category = array_search( $page_category_id, $form_categories );
+					endif;
+					if ( $matching_category !== false ) :
+						$found_contact_form = $contact_form;
+						break; // Stop the loop.
+					endif;
+				endforeach; // endforeach ( $contact_form_category_repeater as $contact_form ) :
+				$used_contact_form   = $found_contact_form['contact_form'];
+			endif; // endif ( isset( $contact_form_category_repeater ) ) :
 			$contact_form_id     = $used_contact_form->ID;
 			$contact_form_title  = $used_contact_form->post_title;
 			$contact_form_output = do_shortcode( '[contact-form-7 id="' . $contact_form_id . '" title="' . $contact_form_title . '"]' );
 			echo __( $contact_form_output, 'xten' );
-		endif; // endif ( have_rows( $contact_form_category_repeater ) ) :
+		endif; // endif ( $contact_form_override || isset( $contact_form_category_repeater ) ) :
 
 		echo $args['after_widget'];
 	}
