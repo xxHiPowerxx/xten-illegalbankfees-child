@@ -65,7 +65,7 @@ class contact_forms_widget extends WP_Widget {
 		endif;
 
 		// Get Page Contact Form Override if exists.
-		$contact_form_override          = get_field( 'contact_form_override' );
+		$contact_form_override          = get_field( 'contact_form_override', get_queried_object() );
 		// Get Contact Form requested.
 		$get_field_param                = 'widget_' . $widget_id;
 		$contact_form_category_repeater = get_field( 'contact_form_category_repeater', $get_field_param );
