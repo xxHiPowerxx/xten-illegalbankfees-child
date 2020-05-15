@@ -20,6 +20,148 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5ebd8ff5a655e",
+            "label": "Contact Form Popup",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ebc240a348d0",
+            "label": "Contact Form Qualify Popup",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ebc244b348d2",
+            "label": "Qualify Popup Title",
+            "name": "qualify_popup_title",
+            "type": "text",
+            "instructions": "This is the Title of the Qualifying Popup",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5ebc248d348d3",
+            "label": "Qualifying Popup Content",
+            "name": "qualifying_popup_content",
+            "type": "wysiwyg",
+            "instructions": "This is the content for the Qualifying Popup.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 1
+        },
+        {
+            "key": "field_5ebd9103a655f",
+            "label": "Contact Form Rejection Popup",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ebd913da6561",
+            "label": "Rejection Popup Title",
+            "name": "rejection_popup_title",
+            "type": "text",
+            "instructions": "This is the Title of the Qualifying Popup",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5ebd9128a6560",
+            "label": "Rejection Popup Content",
+            "name": "rejection_popup_content",
+            "type": "wysiwyg",
+            "instructions": "This is the content for the Qualifying Popup.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 1
+        },
+        {
+            "key": "field_5ebd924bd76f5",
+            "label": "Contact Form Popup Accordion Endpoint",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
         }
     ],
     "location": [
@@ -39,5 +181,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1588182296
+    "modified": 1589482080
 }
