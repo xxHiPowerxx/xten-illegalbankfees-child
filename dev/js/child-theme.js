@@ -1,8 +1,8 @@
 // Write JS here
-(function($) {
-	$(document).on("ready", function() {
+(function ($) {
+	$(document).on("ready", function () {
 		function addHTMLValidationToCF() {
-			$("form.wpcf7-form").each(function() {
+			$("form.wpcf7-form").each(function () {
 				$(this)
 					.removeAttr("novalidate")
 					.find('[aria-required="true"]')
@@ -21,7 +21,7 @@
 			$("html, body").animate({ scrollTop: scrollPosition }, 350);
 		}
 		function interceptHashChange($target = null) {
-			$(window).on("load hashchange", function(e) {
+			$(window).on("load hashchange", function (e) {
 				if (window.location.hash && $(window.location.hash).length) {
 					$target = $target || $(window.location.hash);
 				}
@@ -31,7 +31,7 @@
 			});
 		}
 		function scrollToTargetOnClick() {
-			$('[href*="#contact-us"]').on("click keyup", function(e) {
+			$('[href*="#contact-us"]').on("click keyup", function (e) {
 				var key = e.key || e.keyCode;
 				if (key) {
 					var enterKey = key === "Enter" || key === 13;
@@ -54,9 +54,41 @@
 				}
 			});
 		}
+		function checkForQualify() {
+			$('.checkForQualify').each(function () {
+				var form = $(this).closest('.wpcf7');
+				// Localhost cannot send mail,
+				// but modal should only be triggered on successful mail send.
+				// form.on('wpcf7submit ', function () {
+				form.on('wpcf7mailsent', function () {
+					var qualifier = $(this).find('.qualifier'),
+						qualifierVals = [],
+						realQualifier,
+						modal,
+						allQualify;
+					qualifier.each(function (index) {
+						var input = $(this).find('input');
+						if (input.length > 1) {
+							realQualifier = $(this).find('input[value="Yes"]');
+						} else {
+							realQualifier = input;
+						}
+						qualifierVals.push(realQualifier.prop('checked'));
+					});
+					allQualify = qualifierVals.every(function (val) { return val });
+					if (allQualify) {
+						modal = $('#contact-qualify-modal');
+					} else {
+						modal = $('#contact-rejection-modal');
+					}
+					modal.modal('show');
+				});
+			});
+		}
 		function initScrollToTarget() {
 			interceptHashChange();
 			scrollToTargetOnClick();
+			checkForQualify();
 		}
 		function readyFuncs() {
 			addHTMLValidationToCF();
