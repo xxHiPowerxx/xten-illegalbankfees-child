@@ -543,31 +543,66 @@ $weird-content-padding: 1.5rem;
 /*   /Contact Form   */
 
 /*   Sidebar Modal   */
-#sidebar-modal {
+.xten-modal {
 	z-index: 8001;
+	.modal-header {
+		padding: 1.5rem;
+		display: flex;
+		align-items: center;
+		.close {
+			margin: 0 0 auto auto;
+			padding: 0;
+		}
+	}
+	.modal-title {
+		font-size: 2.8rem;
+		color: $white;
+		line-height: 1;
+	}
 	.primary-sidebar {
 		margin-top: 0;
 	}
 	.modal-dialog {
-		padding: 3rem
-			1.5rem;
+		padding: 3rem 1.5rem;
 	}
 	.close {
-		padding: 0.25em
-			0.5em;
 		font-size: 2.4rem;
+		line-height: 1;
+		height: 1em;
+		width: 1em;
 		@media ( min-width: $vp_xl ) {
 			font-size: 3rem;
 		}
-		position: absolute;
 		background-color: $white;
-		right: 1.5rem;
-		top: 0.75rem;
-		opacity: 1;
+		opacity: 1 !important;
+		transition: $smooth-transition;
+		backface-visibility: hidden;
+		transform: translateZ(0);
+		#{$active} {
+			transform: scale(1.1) translateZ(0);
+		}
 	}
 	.widget-title {
 		padding-right: 8rem;
 	}
+	&#sidebar-modal {
+		.close {
+			position: absolute;
+			right: 1.5rem;
+			top: 1.5rem;
+		}
+	}
+	.modal-body {
+		padding: 1.5rem;
+	}
+	.btn {
+		margin: .5em;
+	}
+}
+.ctnr-modal-cta-btns {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
 }
 .modal-backdrop {
 	z-index: 8000;
@@ -582,8 +617,7 @@ $weird-content-padding: 1.5rem;
 	@media (min-width: $vp_sm) {
 		font-size: 2.2rem;
 	}
-	@at-root body.xten-mobile-menu-active
-			& {
+	@at-root body.xten-mobile-menu-active & {
 		display: block;
 	}
 	&:active {
@@ -709,7 +743,8 @@ body {
 .xten-section-hero .xten-content,
 .entry-header .featured-image-mask-inner {
 	text-align: center;
-	> * {
+	> *,
+	.entry-title {
 		margin-bottom: 0;
 	}
 	> :not(:first-child) {
