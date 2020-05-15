@@ -8,7 +8,7 @@
  *
  * @package xten
  */
-include get_stylesheet_directory() . '/inc/sidebar-modal.php';
+include get_stylesheet_directory() . '/inc/modals.php';
 ?>
 		</div> <!-- /row -->
 	</div> <!-- /container -->
