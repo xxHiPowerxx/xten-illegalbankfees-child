@@ -61,6 +61,148 @@
             "multiple": 0,
             "return_format": "object",
             "ui": 1
+        },
+        {
+            "key": "field_5ebeee9375851",
+            "label": "Contact Form Popup",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ebef32575856",
+            "label": "Contact Form Qualifying Popup Override",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ebef03c75853",
+            "label": "Qualifying Popup Title Override",
+            "name": "qualifying_popup_title_override",
+            "type": "text",
+            "instructions": "This is the Override for the Global Title of the Contact Form Qualifying Popup",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5ebef2ae75855",
+            "label": "Qualifying Popup Content Override",
+            "name": "qualifying_popup_content_override",
+            "type": "wysiwyg",
+            "instructions": "This is the content Override for the Global Contact Form Qualifying Popup.<br \/>\r\nThis will support variables:<br \/>\r\n<b>${category}<\/b> = <b>\"Investigation Category\"<\/b>.<br \/>\r\n<b>${title}<\/b> = <b>\"Investigation Title\"<\/b>.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 1
+        },
+        {
+            "key": "field_5ebef35f75857",
+            "label": "Contact Form Rejection Popup Override",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ebef37275858",
+            "label": "Rejection Popup Title Override",
+            "name": "rejection_popup_title_override",
+            "type": "text",
+            "instructions": "This is the Override for the Global Title of the Contact Form Rejection Popup",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5ebef39175859",
+            "label": "Rejection Popup Content Override",
+            "name": "rejection_popup_content_override",
+            "type": "wysiwyg",
+            "instructions": "This is the content Override for the Global Contact Form Rejection Popup.<br \/>\r\nThis will support variables:<br \/>\r\n<b>${category}<\/b> = <b>\"Investigation Category\"<\/b>.<br \/>\r\n<b>${title}<\/b> = <b>\"Investigation Title\"<\/b>.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 1
+        },
+        {
+            "key": "field_5ebef02f75852",
+            "label": "Contact Form Popup Accordion Endpoint",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
         }
     ],
     "location": [
@@ -94,5 +236,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1589311424
+    "modified": 1589572879
 }
