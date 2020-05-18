@@ -40,7 +40,7 @@
         },
         {
             "key": "field_5ebc240a348d0",
-            "label": "Contact Form Qualify Popup",
+            "label": "Global Contact Form Qualifying Popup",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -56,10 +56,10 @@
         },
         {
             "key": "field_5ebc244b348d2",
-            "label": "Qualify Popup Title",
-            "name": "qualify_popup_title",
+            "label": "Global Qualifying Popup Title",
+            "name": "global_qualifying_popup_title",
             "type": "text",
-            "instructions": "This is the Title of the Qualifying Popup",
+            "instructions": "This is the Global Title of the Contact Form Qualifying Popup<br \/>\r\nIt can be Overridden on Pages",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -75,10 +75,10 @@
         },
         {
             "key": "field_5ebc248d348d3",
-            "label": "Qualifying Popup Content",
-            "name": "qualifying_popup_content",
+            "label": "Global Qualifying Popup Content",
+            "name": "global_qualifying_popup_content",
             "type": "wysiwyg",
-            "instructions": "This is the content for the Qualifying Popup.",
+            "instructions": "This is the Global content for the Contact Form Qualifying Popup.<br \/>\r\nCan be Overridden on Specific Pages.<br \/>\r\nThis will support variables:<br \/>\r\n<b>${category}<\/b> = <b>\"Investigation Category\"<\/b>.<br \/>\r\n<b>${title}<\/b> = <b>\"Investigation Title\"<\/b>.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -94,7 +94,7 @@
         },
         {
             "key": "field_5ebd9103a655f",
-            "label": "Contact Form Rejection Popup",
+            "label": "Global Contact Form Rejection Popup",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -110,10 +110,10 @@
         },
         {
             "key": "field_5ebd913da6561",
-            "label": "Rejection Popup Title",
-            "name": "rejection_popup_title",
+            "label": "Global Rejection Popup Title",
+            "name": "global_rejection_popup_title",
             "type": "text",
-            "instructions": "This is the Title of the Qualifying Popup",
+            "instructions": "This is the Global Title of the Contact Form Rejection Popup<br \/>\r\nIt can be Overridden on Pages",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -128,11 +128,11 @@
             "maxlength": ""
         },
         {
-            "key": "field_5ebd9128a6560",
-            "label": "Rejection Popup Content",
-            "name": "rejection_popup_content",
+            "key": "field_5ebeef7acc0ac",
+            "label": "Global Rejection Popup Content",
+            "name": "global_rejection_popup_content",
             "type": "wysiwyg",
-            "instructions": "This is the content for the Qualifying Popup.",
+            "instructions": "This is the Global content for the Contact Form Rejection Popup.<br \/>\r\nCan be Overridden on Specific Pages.<br \/>\r\nThis will support variables:<br \/>\r\n<b>${category}<\/b> = <b>\"Investigation Category\"<\/b>.<br \/>\r\n<b>${title}<\/b> = <b>\"Investigation Title\"<\/b>.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -181,5 +181,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1589482080
+    "modified": 1589571761
 }
