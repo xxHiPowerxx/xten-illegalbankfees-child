@@ -54,6 +54,15 @@
 				}
 			});
 		}
+		function dynamicInput() {
+			$('.dynamicInput').each(function () {
+				$(this).find('.dynamicInputField').each(function () {
+					var inputId = '#' + $(this).attr('data-input-id'),
+						getVal = $(inputId).first().val();
+					$(this).text(getVal);
+				});
+			});
+		}
 		function checkForQualify() {
 			$('.checkForQualify').each(function () {
 				var form = $(this).closest('.wpcf7');
@@ -81,6 +90,7 @@
 					} else {
 						modal = $('#contact-rejection-modal');
 					}
+					dynamicInput();
 					modal.modal('show');
 				});
 			});
