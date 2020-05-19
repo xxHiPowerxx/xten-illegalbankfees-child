@@ -76,8 +76,8 @@ $rejection_popup_content = $rejection_popup_content ?
 													 wp_kses_post( get_field( 'global_rejection_popup_content', 'option', false ) );
 if ( $rejection_popup_content ) :
 	// Find ${financial-institution} and wrap in span.
-	$qualifying_popup_content = xten_word_wrap( 
-																$qualifying_popup_content,
+	$rejection_popup_content = xten_word_wrap( 
+																$rejection_popup_content,
 																$word_to_find,
 																$wrap_before,
 																$wrap_after
