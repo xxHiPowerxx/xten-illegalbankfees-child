@@ -20,6 +20,25 @@
             "endpoint": 0
         },
         {
+            "key": "field_5ec416e418e4b",
+            "label": "Page Heading Override",
+            "name": "page_heading_override",
+            "type": "wysiwyg",
+            "instructions": "Use this if you want to override the page heading. Leave Blank for Default Page Title",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "text",
+            "media_upload": 0,
+            "toolbar": "full",
+            "delay": 0
+        },
+        {
             "key": "field_5eb1fcdea3a60",
             "label": "Default Investigation Description",
             "name": "default_investigation_description",
@@ -73,5 +92,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1588889303
+    "modified": 1589912110
 }
