@@ -1,0 +1,43 @@
+{
+    "key": "group_5ec56d904a661",
+    "title": "Investigation Attributes",
+    "fields": [
+        {
+            "key": "field_5ec56da040eb8",
+            "label": "Active Investigation",
+            "name": "active_investigation",
+            "type": "true_false",
+            "instructions": "Select Whether this is an <b>Active<\/b> Investigation. If <b>Active<\/b> this Investigation will display when Active Investigations are Listed.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Active",
+            "ui_off_text": "Inactive"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "investigations"
+            }
+        ]
+    ],
+    "menu_order": -1,
+    "position": "side",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1589997242
+}
