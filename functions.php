@@ -125,3 +125,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  * Require Widgets File for custom widgets.
  */
 require get_stylesheet_directory() . '/inc/widgets.php';
+
+if ( ! function_exists( 'xten_get_active_investigations' ) ) :
+/**
+ * Utility Function to get list of "Active" Investigations
+ * returns an array of post-objects.
+ * @return array
+ */
+function xten_get_active_investigations( $posts = null, $category = null ) {
+	if ( ! $posts ) :
+		if ( $category === 'this_category' ) :
+			$category = get_queried_object()->term_id ? : null ;
+		endif;
+		$posts = get_posts(
+							array(
+							'numberposts' => -1,
+							'post_type'   => 'investigations',
+							'meta_key'    => 'active_investigation',
+							'category'    => $category,
+							)
+						);
+	endif; // endif ( $posts === null ) :
+	return $posts;
+}
+endif; // endif ( ! function_exists( 'xten_get_active_investigations' ) ) :
+
+/**
+ * Create Dynamic Select Input form CF7
+ * Select will have list of "Active" Investigations
+ */
+function cf7_dynamic_select_active_investigations($choices, $args=array()) {
+	// this function returns an array of 
+	// label => value pairs to be used in
+	// a the select field
+	$choices               = array('-- Financial Institution --' => '');
+	$active_investigations = xten_get_active_investigations(false, $args['category']);
+	foreach ( $active_investigations as $active_investigation ) :
+		$investigation_name = $active_investigation->post_title;
+		$choices[$investigation_name] = $investigation_name;
+	endforeach;
+
+	$choices['Other'] = null;
+	return $choices;
+} // end function cf7_dynamic_select_active_investigations
+add_filter('wpcf7_dynamic_select', 'cf7_dynamic_select_active_investigations', 10, 2);
