@@ -540,6 +540,19 @@ $weird-content-padding: 1.5rem;
 		}
 	}
 }
+/*   specifyOther   */
+.specify-other-input-group {
+	@at-root .specifyOtherParent:not(.otherSelected) & {
+		display: none;
+	}
+	display: flex;
+	margin-top: 1.5rem;
+	> :not(:first-child) {
+		margin-left: .5em;
+	}
+}
+/*   /specifyOther   */
+
 /*   /Contact Form   */
 
 /*   Sidebar Modal   */
