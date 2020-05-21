@@ -19,7 +19,12 @@
             "default_value": 0,
             "ui": 1,
             "ui_on_text": "Active",
-            "ui_off_text": "Inactive"
+            "ui_off_text": "Inactive",
+            "show_column": 1,
+            "show_column_sortable": 1,
+            "show_column_weight": 100,
+            "allow_quickedit": 1,
+            "allow_bulkedit": 1
         }
     ],
     "location": [
@@ -39,5 +44,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1589997242
+    "modified": 1590085296
 }
