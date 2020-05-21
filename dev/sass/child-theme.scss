@@ -551,6 +551,27 @@ $weird-content-padding: 1.5rem;
 		margin-left: .5em;
 	}
 }
+.specifyOtherParent {
+	.addOtherOption {
+		.fa,
+		.far,
+		.fas {
+			transition: $smooth-transition;
+			backface-visibility: visible;
+			transform: translateZ(0) rotate(0deg);
+		}
+	}
+	&.inputEmpty {
+		.addOtherOption {
+			.fa,
+			.far,
+			.fas {
+				transform: translateZ(0) rotate(225deg);
+			}
+		}
+	}
+} 
+
 /*   /specifyOther   */
 
 /*   /Contact Form   */
