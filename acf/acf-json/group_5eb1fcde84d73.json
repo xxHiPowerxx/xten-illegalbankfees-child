@@ -70,7 +70,7 @@
                 "class": "",
                 "id": ""
             },
-            "open": 1,
+            "open": 0,
             "multi_expand": 0,
             "endpoint": 1
         }
@@ -92,5 +92,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1590090292
+    "modified": 1590092016
 }
