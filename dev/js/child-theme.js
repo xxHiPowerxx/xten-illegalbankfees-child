@@ -102,28 +102,28 @@
 					parent = $(this).closest('.specifyOtherParent'),
 					textInput = parent.find('.specifyOtherTextInput'),
 					addOtherOption = parent.find('.addOtherOption'),
+					addOtherOptionTitle = addOtherOption.attr('title'),
+					addOtherOptionLabel = addOtherOption.attr('aria-label'),
 					otherOption;
 				$(this).children().each(function () {
 					if ($(this).text() === 'Other') {
 						otherOption = $(this);
+						this.value = '';
+						$(this).on('select', function () {
+							$(this).parent().trigger('change');
+						});
 					}
 				});
 				$(this).on('change', function () {
 					if ($(this).val() === '' && otherOption.is(':selected')) {
 						parent.addClass('otherSelected');
+						textInput.prop('required', true).focus();
 					} else {
 						parent.removeClass('otherSelected');
+						textInput.prop('required', false);
 					}
 				});
-				addOtherOption.on('click keyup', function (e) {
-					var key = e.key || e.keyCode;
-					if (key) {
-						var enterKey = key === "Enter" || key === 13;
-						var spaceKey = key === " " || key === 32;
-						if (!(enterKey || spaceKey)) {
-							return;
-						}
-					}
+				function addOtherOptionFunc() {
 					var textInputVal = textInput.val();
 					if (!specifyOther.children('[value="' + textInputVal + '"]').length) {
 						var optionTag = document.createElement('option');
@@ -133,15 +133,53 @@
 					}
 					$(optionTag).prop('selected', true);
 					parent.removeClass('otherSelected');
-				})
-			});
+					textInput.prop('required', false);
+				}
+				addOtherOption.on('click keyup', function (e) {
+					var key = e.key || e.keyCode;
+					if (key) {
+						var enterKey = key === "Enter" || key === 13;
+						var spaceKey = key === " " || key === 32;
+						if (!(enterKey || spaceKey)) {
+							return;
+						}
+					}
+					addOtherOptionFunc();
+				});
+				function checkForEmptyInput(elem) {
+					if (elem.val().length === 0) {
+						addOtherOption.attr('title', 'Cancel').attr('aria-label', 'Cancel');
+						parent.addClass('inputEmpty');
+					} else {
+						addOtherOption.attr('title', addOtherOptionTitle).attr('aria-label', addOtherOptionLabel);
+						parent.removeClass('inputEmpty');
+					}
+				}
+				textInput.each(function () {
+					checkForEmptyInput($(this));
+					$(this).on('keyup', function () {
+						checkForEmptyInput($(this));
+					}).on('keydown', function (e) {
+						var key = e.key || e.keyCode;
+						if (key) {
+							var enterKey = key === "Enter" || key === 13;
+							console.log(key);
+							if (enterKey) {
+								e.stopImmediatePropagation();
+								e.preventDefault();
+								addOtherOptionFunc();
+							}
+						}
+					});
+				});
+			}).trigger('change');
 		}
 		function readyFuncs() {
-			addHTMLValidationToCF();
 			interceptHashChange();
 			scrollToTargetOnClick();
 			checkForQualify();
 			specifyOther();
+			addHTMLValidationToCF();
 		}
 		readyFuncs();
 	});
