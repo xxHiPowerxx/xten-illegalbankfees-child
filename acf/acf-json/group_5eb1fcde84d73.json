@@ -40,10 +40,10 @@
         },
         {
             "key": "field_5eb1fcdea3a60",
-            "label": "Default Investigation Description",
-            "name": "default_investigation_description",
+            "label": "Default Investigation Heading",
+            "name": "default_investigation_heading",
             "type": "wysiwyg",
-            "instructions": "This Description will be used for each Investigation that falls into this category.\r\nThis will support variables:\r\n${title} = \"Investigation Title\".\r\nNote: If there is more than one category it will pull from the most recent.",
+            "instructions": "This Heading will be used for each Investigation that falls into this category.\r\nThis will support variables:\r\n${title} = \"Investigation Title\".\r\nNote: If there is more than one category it will pull from the most recent.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -92,5 +92,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1589912110
+    "modified": 1590090292
 }
