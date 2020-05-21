@@ -95,14 +95,53 @@
 				});
 			});
 		}
-		function initScrollToTarget() {
-			interceptHashChange();
-			scrollToTargetOnClick();
-			checkForQualify();
+		// Function to add Text Field when "Other" is selected on input.
+		function specifyOther() {
+			$('.specifyOther').each(function () {
+				var specifyOther = $(this),
+					parent = $(this).closest('.specifyOtherParent'),
+					textInput = parent.find('.specifyOtherTextInput'),
+					addOtherOption = parent.find('.addOtherOption'),
+					otherOption;
+				$(this).children().each(function () {
+					if ($(this).text() === 'Other') {
+						otherOption = $(this);
+					}
+				});
+				$(this).on('change', function () {
+					if ($(this).val() === '' && otherOption.is(':selected')) {
+						parent.addClass('otherSelected');
+					} else {
+						parent.removeClass('otherSelected');
+					}
+				});
+				addOtherOption.on('click keyup', function (e) {
+					var key = e.key || e.keyCode;
+					if (key) {
+						var enterKey = key === "Enter" || key === 13;
+						var spaceKey = key === " " || key === 32;
+						if (!(enterKey || spaceKey)) {
+							return;
+						}
+					}
+					var textInputVal = textInput.val();
+					if (!specifyOther.children('[value="' + textInputVal + '"]').length) {
+						var optionTag = document.createElement('option');
+						optionTag.value = textInputVal;
+						optionTag.text = textInputVal;
+						otherOption.before(optionTag);
+					}
+					$(optionTag).prop('selected', true);
+					parent.removeClass('otherSelected');
+				})
+			});
 		}
 		function readyFuncs() {
 			addHTMLValidationToCF();
-			initScrollToTarget();
+			interceptHashChange();
+			scrollToTargetOnClick();
+			checkForQualify();
+			specifyOther();
 		}
 		readyFuncs();
 	});
