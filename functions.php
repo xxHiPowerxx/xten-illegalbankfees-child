@@ -165,7 +165,7 @@ function cf7_dynamic_select_active_investigations($choices, $args=array()) {
 		$choices[$investigation_name] = $investigation_name;
 	endforeach;
 
-	$choices['Other'] = null;
+	$choices['Other'] = 'other';
 	return $choices;
 } // end function cf7_dynamic_select_active_investigations
 add_filter('wpcf7_dynamic_select', 'cf7_dynamic_select_active_investigations', 10, 2);
