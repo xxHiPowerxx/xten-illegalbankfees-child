@@ -132,17 +132,27 @@ if ( ! function_exists( 'xten_get_active_investigations' ) ) :
  * returns an array of post-objects.
  * @return array
  */
-function xten_get_active_investigations( $posts = null, $category = null ) {
+function xten_get_active_investigations( $posts = null, $category_args = null ) {
 	if ( ! $posts ) :
-		if ( $category === 'this_category' ) :
-			$category = get_queried_object()->term_id ? : null ;
+		$post_type = 'investigations';
+		if ( $category_args === 'this_category' ) :
+			if ( is_singular( $post_type ) ) :
+				$get_category = get_the_category();
+				$cat_object = ! empty( $get_category ) ? $get_category[0] : null;
+			elseif ( is_post_type_archive( $post_type ) ) :
+				$cat_object = null;
+			else :
+				$cat_object = get_queried_object();
+			endif;
+			$category_id = $cat_object->term_id;
 		endif;
 		$posts = get_posts(
 							array(
 							'numberposts' => -1,
-							'post_type'   => 'investigations',
+							'post_type'   => $post_type,
 							'meta_key'    => 'active_investigation',
-							'category'    => $category,
+							'meta_value'	=> true,
+							'category'    => $category_id,
 							)
 						);
 	endif; // endif ( $posts === null ) :
