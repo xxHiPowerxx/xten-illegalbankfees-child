@@ -75,14 +75,24 @@
 						realQualifier,
 						modal,
 						allQualify;
-					qualifier.each(function (index) {
-						var input = $(this).find('input');
-						if (input.length > 1) {
-							realQualifier = $(this).find('input[value="Yes"]');
-						} else {
-							realQualifier = input;
+					qualifier.each(function () {
+						var input = $(this);
+						if (!$(this).is('input') && !$(this).is('select')) {
+							input = $(this).find('input, select');
 						}
-						qualifierVals.push(realQualifier.prop('checked'));
+						if (input.is('select') && input.is('.specifyOther')) {
+							var selectedOption = input.children(':selected'),
+								// If user chooses "Other" in .specifyOther select they do not qualify.
+								notOtherOption = selectedOption.attr('data-other-option') ? false : true;
+							qualifierVals.push(notOtherOption);
+						} else { // ! input.is('select')
+							if (input.length > 1) {
+								realQualifier = $(this).find('input[value="Yes"]');
+							} else {
+								realQualifier = input;
+							}
+							qualifierVals.push(realQualifier.prop('checked'));
+						} // endif ( input.is('select') )
 					});
 					allQualify = qualifierVals.every(function (val) { return val });
 					if (allQualify) {
@@ -129,6 +139,7 @@
 						var optionTag = document.createElement('option');
 						optionTag.value = textInputVal;
 						optionTag.text = textInputVal;
+						optionTag.setAttribute('data-other-option', true);
 						otherOption.before(optionTag);
 					}
 					$(optionTag).prop('selected', true);
@@ -163,7 +174,6 @@
 						var key = e.key || e.keyCode;
 						if (key) {
 							var enterKey = key === "Enter" || key === 13;
-							console.log(key);
 							if (enterKey) {
 								e.stopImmediatePropagation();
 								e.preventDefault();
