@@ -19,6 +19,7 @@ $tertiary: rgb(242, 223, 104);
 $quartiary: rgb(51, 51, 51);
 $white: rgb(255, 255, 255);
 $off-white: rgb(245, 245, 245);
+$gray: rgb(153, 153, 153);
 $dark: rgb(51, 51, 51);
 $darker: rgb(25, 25, 25);
 /*   /Colors   */
@@ -28,6 +29,11 @@ $darker: rgb(25, 25, 25);
 $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 .smooth-transition {
 	transition: $smooth-transition;
+}
+/*   Smooth Transition    */
+.smoother-transition {
+	transform: translateZ(0);
+	backface-visibility: hidden;
 }
 
 $active: "&:hover,&:focus,&.active";
