@@ -20,6 +20,11 @@
 
 	<body <?php body_class('xten-theme-color-bg'); ?> data-spy="scroll" data-target="#xten-scroll-nav" data-offset="100">
 
+		<div id="load-splash" class="loading xten-theme-color-bg">
+			<div class="load-splash-inner">
+				<?php echo $GLOBALS['xten-site-logo']; ?>
+			</div>
+		</div>
 		<div id="page" class="site">
 			<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'xten' ); ?></a>
 			<?php require_once get_stylesheet_directory() . '/inc/header/header-menu.php'; ?>
