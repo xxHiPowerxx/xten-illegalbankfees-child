@@ -532,6 +532,7 @@ $weird-content-padding: 1.5rem;
 		.far,
 		.fas {
 			transition: $smooth-transition;
+			transition-property: transform;
 			backface-visibility: visible;
 			transform: translateZ(0) rotate(0deg);
 		}
@@ -545,15 +546,193 @@ $weird-content-padding: 1.5rem;
 			}
 		}
 	}
-} 
-
+}
 /*   /specifyOther   */
-
+.hide-next-sibling {
+	+ * {
+		display: none;
+	}
+}
+/*   formState   */
+.formState {
+  position: absolute;
+  height: 100% !important;
+	width: 100%;
+	transition: $smooth-transition;
+	backface-visibility: hidden;
+	&.collapsing,
+	&.show {
+		transform: translate3d(0, 0, 0);
+	}
+	&:not(.show),
+	&.collapsing ~ .formState.collapsing {
+		transform: translate3d(105%, 0, 0);
+	}
+	&.collapsing {
+		transform: translate3d(-105%,0,0);
+	}
+	&.sizing {
+		display: block;
+	}
+	.formState-controls {
+		margin-top: auto;
+		display: flex;
+		flex-wrap: wrap;
+		.btn {
+			margin: 0;
+		}
+		.formState-control-prev {
+			margin-right: auto;
+		}
+		.formState-control-next {
+			margin-left: auto;
+		}
+	}
+}
+.sizing {
+	.sizer {
+		display: block;
+	}
+}
+#right-sidebar {
+	&:not(.sizing) {
+		.formState-content {
+			flex: 1 1 auto;
+		}
+	}
+}
+#sidebar-modal {
+	&.sizing {
+		display: block !important;
+		z-index: -9999;
+		top: -100%;
+		visibility: hidden;
+	}
+}
+.formState-nav {
+  position: relative;
+  display: flex;
+}
+.formState-nav-progress {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+		transition: $smooth-transition;
+		transform-origin: 0 50%;
+		transform: scaleX(0) translateZ(0);
+		backface-visibility: hidden;
+		box-shadow: 0 .1rem .25rem rgba(0, 0, 0, 0.5);
+}
+.btn-formState-nav {
+  background-color: transparent;
+  border: 1px solid $white;
+  border-right: 0;
+  position: relative;
+  border-radius: 0;
+	flex: 1;
+	transition: $smooth-transition;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	&:hover {
+		background-color: rgba($white, .25);
+	}
+	&:first-of-type {
+		border-left: 0;
+	}
+	&.btn-formStateResponse {
+		display: none;
+	}
+	&[aria-expanded="true"] {
+		~ .btn-formState-nav {
+			border-color: $gray;
+			&:hover {
+				background-color: rgba($primary, .25);
+			}
+		}
+	}
+}
+.formStateParent {
+	div.wpcf7 {
+		padding-top: 0;
+		padding-bottom: 0;
+		.ajax-loader {
+			width: 100%;
+			order: -1;
+			background-repeat: no-repeat;
+			background-position: calc(100% - 6.95em) 50%;
+			margin-bottom: .5em;
+		}
+	}
+}
+.collapse {
+	transition: $smooth-transition;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+}
+/*   /formState   */
+/*   Parent Theme Override   */
+#right-sidebar {
+	&.formStateParent {
+		.primary-sidebar {
+			position: fixed;
+			@at-root body.scrollSpyBottomOut & {
+				position: absolute;
+				bottom: 0;
+			}
+		}
+	}
+}
+.formStateParent {
+	.primary-sidebar {
+		.widget_contact_forms_widget {
+			&.widget {
+				padding-left: 0;
+				padding-right: 0;
+				.widget-title {
+					margin-left: 0;
+					margin-right: 0;
+				}
+			}
+		}
+	}
+}
+/*   /Parent Theme Override   */
+.wpcf7-form {
+	position: relative;
+	overflow: hidden;
+	transition: $smooth-transition;
+	@extend .smoother-transition;
+}
+.formState-inner {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	> * {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+	> :last-child {
+		padding-bottom: 1.5rem;
+	}
+}
+.formState-content {
+	overflow-y: auto;
+}
+.formState-content-inner {
+	margin-bottom: 3rem;
+	padding-top: 1.5rem;
+}
+/*   formState   */
 /*   /Contact Form   */
 
 /*   Sidebar Modal   */
 .xten-modal {
 	z-index: 8001;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
 	.modal-header {
 		padding: 1.5rem;
 		display: flex;
@@ -572,7 +751,9 @@ $weird-content-padding: 1.5rem;
 		margin-top: 0;
 	}
 	.modal-dialog {
-		padding: 3rem 1.5rem;
+		padding: 0rem 1.5rem;
+		margin: 0 auto;
+		min-height: 100%;
 	}
 	.close {
 		font-size: 2.4rem;
