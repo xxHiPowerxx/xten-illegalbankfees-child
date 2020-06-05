@@ -515,6 +515,9 @@ $weird-content-padding: 1.5rem;
 		}
 	}
 }
+span.wpcf7-not-valid-tip {
+	color: $dark-red;
+}
 /*   specifyOther   */
 .specify-other-input-group {
 	@at-root .specifyOtherParent:not(.otherSelected) & {
@@ -609,9 +612,10 @@ $weird-content-padding: 1.5rem;
 		visibility: hidden;
 	}
 }
-.formState-nav {
+.ctnr-btn-formState-nav {
   position: relative;
-  display: flex;
+	display: flex;
+	overflow-x: hidden;
 }
 .formState-nav-progress {
 		position: absolute;
@@ -626,6 +630,11 @@ $weird-content-padding: 1.5rem;
 		backface-visibility: hidden;
 		box-shadow: 0 .1rem .25rem rgba(0, 0, 0, 0.5);
 }
+.formState-validation-output {
+  padding: .5em;
+  display: none;
+  color: $dark-red;
+}
 .btn-formState-nav {
   background-color: transparent;
   border: 1px solid $white;
@@ -636,6 +645,10 @@ $weird-content-padding: 1.5rem;
 	transition: $smooth-transition;
 	transform: translateZ(0);
 	backface-visibility: hidden;
+	&.contains-invalid-input {
+		box-shadow: inset 0 0 0em 0.1em $dark-red;
+		border-color: $light-red !important;
+	}
 	&:hover {
 		background-color: rgba($white, .25);
 	}
@@ -644,6 +657,9 @@ $weird-content-padding: 1.5rem;
 	}
 	&.btn-formStateResponse {
 		display: none;
+		@at-root .showformStateResponse & {
+			display: block;
+		}
 	}
 	&[aria-expanded="true"] {
 		~ .btn-formState-nav {
@@ -664,6 +680,11 @@ $weird-content-padding: 1.5rem;
 			background-repeat: no-repeat;
 			background-position: calc(100% - 6.95em) 50%;
 			margin-bottom: .5em;
+		}
+	}
+	&.contains-invalid-input {
+		.formState-validation-output {
+			display: block;
 		}
 	}
 }
@@ -701,6 +722,8 @@ $weird-content-padding: 1.5rem;
 }
 /*   /Parent Theme Override   */
 .wpcf7-form {
+	width: 100%;
+	height: 100%;
 	position: relative;
 	overflow: hidden;
 	transition: $smooth-transition;
