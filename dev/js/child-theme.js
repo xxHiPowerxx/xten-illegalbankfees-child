@@ -137,6 +137,13 @@
 					} else {
 						modal = $('#contact-rejection-modal');
 					}
+
+					var $formStateResponse = $(this).find('.formStateResponse');
+					if ($formStateResponse.length) {
+						$(this).addClass('showformStateResponse');
+						$formStateResponse.collapse('show');
+					}
+
 					dynamicInput();
 					modal.modal('show');
 				});
@@ -241,18 +248,28 @@
 			}
 			$('.wpcf7-form').each(function () {
 				var $form = $(this),
-					// formStates = $(this).find('.formState');
 					$formStateParent = $(this).closest('.formStateParent');
 				if ($formStateParent.length) {
 					var $formStates = $formStateParent[0]['formStates'],
 						parentId = $(this).parent().attr('id'),
 						nav = document.createElement('nav'),
-						progress = document.createElement('div');
+						ctnrBtnNav = document.createElement('div'),
+						progress = document.createElement('div'),
+						validationOutPut = document.createElement('div'),
+						responseOutPut = $(this).find('.wpcf7-response-output');
+					ctnrBtnNav.classList.add('ctnr-btn-formState-nav');
 					$(progress).addClass('formState-nav-progress progress-bar xten-theme-color-bg');
+					$(validationOutPut).addClass('formState-validation-output nowrap-parent');
+					$(validationOutPut).html('<span>One or more fields have an error.</span> <span>Please check and try again.</span>');
+
 					nav.setAttribute('id', 'formState-nav-' + parentId);
 					nav.classList.add('formState-nav');
+
 					$form.before(nav);
-					nav.appendChild(progress);
+					nav.appendChild(ctnrBtnNav);
+					nav.appendChild(validationOutPut);
+					ctnrBtnNav.appendChild(progress);
+
 					$formStates.each(function () {
 
 						var formStateId = $(this).attr('id'),
@@ -262,6 +279,8 @@
 						$(button).addClass('btn-formState-nav preventExpandedCollapse');
 						if ($(this).is('.formStateResponse')) {
 							button.classList.add('btn-formStateResponse');
+							responseOutPut.detach();
+							$(this).find('.formState-content-inner').prepend(responseOutPut);
 						}
 						setAttributes(button, {
 							'type': 'button',
@@ -270,7 +289,7 @@
 							'aria-expanded': ariaExpanded,
 							'aria-controls': formStateId
 						});
-						nav.appendChild(button);
+						ctnrBtnNav.appendChild(button);
 					});
 				}
 			});
@@ -282,7 +301,8 @@
 						isRightSideBar = $(this).is('#right-sidebar'),
 						// if is NOT right sidebar "secondary" has not yet been found.
 						thisSecondary = isRightSideBar ? secondary : $(this).find('.primary-sidebar').first(),
-						sideBarForm = thisSecondary.find('.wpcf7-form').first(),
+						sideBarFormWrapper = thisSecondary.find('.wpcf7').first(),
+						sideBarForm = sideBarFormWrapper.children('.wpcf7-form'),
 						sizer = sideBarForm.find('.sizer'),
 						sideBarHeight = 0,
 						sideBarWidth = 0;
@@ -314,7 +334,8 @@
 						thisSideBarParent.removeClass('sizing');
 					});
 					sideBarWidth = sideBarWidth === 0 ? 'auto' : sideBarWidth;
-					sideBarForm.width(sideBarWidth).height(sideBarHeight);
+					sideBarFormWrapper.width(sideBarWidth);
+					sideBarForm.height(sideBarHeight);
 				}// endif ( formState.length ) {
 			});
 		}
@@ -395,7 +416,6 @@
 					$progress = $(this),
 					$btns = $(this).siblings('.btn-formState-nav'),
 					$activeBtn = $btns.filter('[aria-expanded="true"]');
-				console.log($activeBtn);
 				updateFormStateProgress($activeBtn, $progress, $parent);
 				$btns.each(function () {
 					var targetFormState = $(this).attr('data-target');
@@ -406,6 +426,69 @@
 					});
 				});
 			});
+		}
+		function invalidFormState() {
+			function checkForFalse(value) {
+				return value === false;
+			}
+			function checkForTrue(value) {
+				return value === true;
+			}
+			var $formStateParent = $('.formStateParent');
+			$formStateParent.each(function () {
+				var $thisFormStateParent = $(this),
+					$submit = $(this).find('input[type="submit"]'),
+					$form = $(this).find('.wpcf7'),
+					$formStateResponse;
+				$submit.on('click', function () {
+					var $formStates = $thisFormStateParent[0]['formStates'],
+						formStateValidity = [],
+						$firstInvalidFormState;
+					$formStates.each(function (index) {
+						var $inputs = $(this).find('input, select, textarea'),
+							inputValidity = [],
+							formStateId = $(this).attr('id'),
+							$btn = $thisFormStateParent.find('.btn-formState-nav[data-target="#' + formStateId + '"]');
+
+						$inputs.each(function (index) {
+							// Special condition for exclusive checkboxes
+							if ($(this).is('[type="checkbox"]')) {
+								var exclusiveCheckBox = $(this).closest('.wpcf7-exclusive-checkbox');
+								if (exclusiveCheckBox.length) {
+									var checkedBox = exclusiveCheckBox.find(':checked');
+									inputValidity[index] = checkedBox.length ? true : false;
+								}
+							} else {
+								inputValidity[index] = this.checkValidity();
+							}
+						});
+
+						// Check to make sure that ALL are TRUE validations.
+						var someFalseInputValidities = inputValidity.some(checkForFalse);
+						if (someFalseInputValidities) {
+							$btn.addClass('contains-invalid-input');
+							if ($firstInvalidFormState === undefined) {
+								$firstInvalidFormState = $(this);
+							}
+						} else {
+							// Else remove invalid class to associated btn.
+							$btn.removeClass('contains-invalid-input');
+						}
+						formStateValidity[index] = someFalseInputValidities;
+					});
+					var allTrueFormStateValidities = formStateValidity.some(checkForTrue);
+					// Check to make sure that ALL are TRUE validations on ALL FormStates.
+					if (allTrueFormStateValidities) {
+						$thisFormStateParent.addClass('contains-invalid-input');
+						$firstInvalidFormState.collapse('show');
+					} else {
+						// Else remove invalid class to associated btn.
+						$thisFormStateParent.removeClass('contains-invalid-input');
+					}
+				});
+			});
+
+
 		}
 		function readyFuncs() {
 			renameSideBarModalIds();
@@ -421,6 +504,7 @@
 			triggerScrollSpySideBar();
 			preventExpandedCollapse();
 			formStateProgress();
+			invalidFormState();
 		}
 		readyFuncs();
 		function resizeFuncs() {
