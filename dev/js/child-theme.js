@@ -280,7 +280,7 @@
 						if ($(this).is('.formStateResponse')) {
 							button.classList.add('btn-formStateResponse');
 							responseOutPut.detach();
-							$(this).find('.formState-content-inner').prepend(responseOutPut);
+							$(this).find('.formState-content-inner').append(responseOutPut);
 						}
 						setAttributes(button, {
 							'type': 'button',
