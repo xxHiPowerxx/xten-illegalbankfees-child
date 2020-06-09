@@ -451,15 +451,23 @@
 							$btn = $thisFormStateParent.find('.btn-formState-nav[data-target="#' + formStateId + '"]');
 
 						$inputs.each(function (index) {
+							var thisValidity,
+								$inputElem = $(this);
 							// Special condition for exclusive checkboxes
 							if ($(this).is('[type="checkbox"]')) {
-								var exclusiveCheckBox = $(this).closest('.wpcf7-exclusive-checkbox');
-								if (exclusiveCheckBox.length) {
-									var checkedBox = exclusiveCheckBox.find(':checked');
-									inputValidity[index] = checkedBox.length ? true : false;
+								var $exclusiveCheckBox = $(this).closest('.wpcf7-exclusive-checkbox');
+								if ($exclusiveCheckBox.length) {
+									var $checkedBox = $exclusiveCheckBox.find(':checked');
+									thisValidity = $checkedBox.length ? true : false;
 								}
 							} else {
-								inputValidity[index] = this.checkValidity();
+								thisValidity = this.checkValidity();
+							}
+							inputValidity[index] = thisValidity;
+							if (!thisValidity) {
+								$inputElem.addClass('input-invalid');
+							} else {
+								$inputElem.removeClass('input-invalid');
 							}
 						});
 
