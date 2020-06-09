@@ -670,6 +670,11 @@ span.wpcf7-not-valid-tip {
 		}
 	}
 }
+form .input-invalid,
+.input-invalid {
+	border-color: $light-red;
+	box-shadow: 0 0 0 0.2rem rgba($dark-red, 0.25);
+}
 .formStateParent {
 	div.wpcf7 {
 		padding-top: 0;
