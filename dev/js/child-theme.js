@@ -18,6 +18,15 @@
 			}
 		});
 
+		function startWork(elem) {
+			window.workStarted = window.workStarted || {};
+			window.workStarted[elem] = true;
+		}
+		function finishWork(elem) {
+			window.dispatchEvent(new CustomEvent('finishWork'));
+			delete window.workStarted[elem];
+		}
+
 		function renameSideBarModalIds() {
 			var dataParentId;
 			sideBarModal.find('[id]:not(.wpcf7)').each(function () {
@@ -297,6 +306,7 @@
 		function sizeSideBar() {
 			sideBarParent.each(function () {
 				if (formStates.length) {
+					startWork(this);
 					var thisSideBarParent = $(this),
 						isRightSideBar = $(this).is('#right-sidebar'),
 						// if is NOT right sidebar "secondary" has not yet been found.
@@ -305,8 +315,10 @@
 						sideBarForm = sideBarFormWrapper.children('.wpcf7-form'),
 						sizer = sideBarForm.find('.sizer'),
 						sideBarHeight = 0,
+						sideBarWidth = 'auto';
+
+					if (isRightSideBar && thisSecondary.css('position') === 'fixed') {
 						sideBarWidth = 0;
-					if (isRightSideBar) {
 						var sideBarParentComputedStyle = getComputedStyle(this),
 							sideBarParentInnerWidth = parseFloat(sideBarParentComputedStyle.width) - parseFloat(sideBarParentComputedStyle.paddingLeft) - parseFloat(sideBarParentComputedStyle.paddingRight),
 							secondaryWidth = secondary[0].getBoundingClientRect().width,
@@ -336,6 +348,7 @@
 					sideBarWidth = sideBarWidth === 0 ? 'auto' : sideBarWidth;
 					sideBarFormWrapper.width(sideBarWidth);
 					sideBarForm.height(sideBarHeight);
+					finishWork(this);
 				}// endif ( formState.length ) {
 			});
 		}
@@ -495,8 +508,34 @@
 					}
 				});
 			});
-
-
+		}
+		function triggerClickOnClick() {
+			$('.triggerClickOnClick').on('click', function () {
+				var clickTarget = $(this).attr('data-click-target'),
+					parent = $(this).closest('.triggerClickOnClickParent');
+				$(clickTarget, parent).click();
+			});
+		}
+		function displayFileNamesOfInput() {
+			$('.displayFileNamesOfInput').each(function () {
+				var $displayFileNamesOfInput = $(this),
+					$parent = $(this).closest('.displayFileNamesOfInputParent'),
+					$input = $parent.find('input[type="file"]');
+				$input.on('change', function () {
+					var files = this.files,
+						textOutPut = '';
+					if (files.length) {
+						if (files.length > 1) {
+							textOutPut = files.length + ' files selected.';
+						} else {
+							textOutPut = files[0].name;
+						}
+						$displayFileNamesOfInput.show().text(textOutPut);
+					} else {
+						$displayFileNamesOfInput.hide();
+					}
+				});
+			});
 		}
 		function readyFuncs() {
 			renameSideBarModalIds();
@@ -513,6 +552,8 @@
 			preventExpandedCollapse();
 			formStateProgress();
 			invalidFormState();
+			triggerClickOnClick();
+			displayFileNamesOfInput();
 		}
 		readyFuncs();
 		function resizeFuncs() {
