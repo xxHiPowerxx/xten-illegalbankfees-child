@@ -556,6 +556,9 @@ span.wpcf7-not-valid-tip {
 		display: none;
 	}
 }
+.file-name-output {
+	margin: .5em 0 .5em .5em;
+}
 /*   formState   */
 .formState {
   position: absolute;
@@ -703,7 +706,9 @@ form .input-invalid,
 #right-sidebar {
 	&.formStateParent {
 		.primary-sidebar {
-			position: fixed;
+			@media (min-width: 1200px) {
+				position: fixed;
+			}
 			@at-root body.scrollSpyBottomOut & {
 				position: absolute;
 				bottom: 0;
