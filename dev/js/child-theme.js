@@ -450,9 +450,7 @@
 			var $formStateParent = $('.formStateParent');
 			$formStateParent.each(function () {
 				var $thisFormStateParent = $(this),
-					$submit = $(this).find('input[type="submit"]'),
-					$form = $(this).find('.wpcf7'),
-					$formStateResponse;
+					$submit = $(this).find('input[type="submit"]');
 				$submit.on('click', function () {
 					var $formStates = $thisFormStateParent[0]['formStates'],
 						formStateValidity = [],
@@ -472,6 +470,8 @@
 								if ($exclusiveCheckBox.length) {
 									var $checkedBox = $exclusiveCheckBox.find(':checked');
 									thisValidity = $checkedBox.length ? true : false;
+								} else {
+									thisValidity = this.checkValidity();
 								}
 							} else {
 								thisValidity = this.checkValidity();
