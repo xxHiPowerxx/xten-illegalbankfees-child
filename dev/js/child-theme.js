@@ -288,8 +288,11 @@
 						$(button).addClass('btn-formState-nav preventExpandedCollapse');
 						if ($(this).is('.formStateResponse')) {
 							button.classList.add('btn-formStateResponse');
+						}
+						if ($(this).is('.formStateSubmit')) {
+							button.classList.add('btn-formStateSubmit');
 							responseOutPut.detach();
-							$(this).find('.formState-content-inner').append(responseOutPut);
+							$(this).find('.formState-content').after(responseOutPut);
 						}
 						setAttributes(button, {
 							'type': 'button',
