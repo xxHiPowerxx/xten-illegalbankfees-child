@@ -36,7 +36,7 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 			if ( ! $hide_post_image ) :
 				?>
 				<div class="featured-image">
-					<?php xten_post_thumbnail( array(957,536) ); ?>
+					<?php xten_post_thumbnail( array(930,null) ); ?>
 					<div class="featured-image-mask">
 						<div class="featured-image-mask-inner">
 							<?php
