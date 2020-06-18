@@ -44,8 +44,8 @@ get_header(); ?>
 						endif;
 						$get_the_title                  = use_acf_field_h1() === '' ? get_the_archive_title() : use_acf_field_h1();
 						$featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button_text') );
-						$archive_description           = get_the_archive_description();
-						$has_archive_description_class = ! $archive_description ? ' no-description' : null;
+						$archive_description            = get_the_archive_description();
+						$has_archive_description_class  = ! $archive_description ? ' no-description' : null;
 						if ( $is_category ) :
 							$archive_thumbnail = get_field( 'category_thumbnail', get_queried_object() );
 						else :
@@ -63,7 +63,7 @@ get_header(); ?>
 								$thumbnail_id  = $archive_thumbnail['ID'];
 								$thumbnail_img = wp_get_attachment_image( 
 									$thumbnail_id,
-									array(957, null),
+									array(930, null),
 									false,
 									array(
 										'title' => single_cat_title( '', false )
