@@ -76,7 +76,7 @@
 				}
 			});
 		}
-		function scrollToTargetOnClick() {
+		function contactUsClick() {
 			$('[href*="#contact-us"]').on("click keyup", function (e) {
 				var key = e.key || e.keyCode;
 				if (key) {
@@ -91,12 +91,20 @@
 				if (body.hasClass("xten-mobile-menu-active")) {
 					sideBarModal.modal("show");
 				} else {
-					history.replaceState(
-						null,
-						null,
-						document.location.pathname + $(this).attr("href")
-					);
-					scrollToTarget($("#right-sidebar"));
+					var secondaryPosition = secondary.css('position');
+					if (
+						secondaryPosition !== 'fixed' &&
+						secondaryPosition !== 'absolute'
+					) {
+						history.replaceState(
+							null,
+							null,
+							document.location.pathname + $(this).attr("href")
+						);
+						scrollToTarget(rightSidebar);
+					} else if ((visibleFormState = secondary.find('.formState.collapse.show')).length) {
+						visibleFormState.find('input:visible').first().focus();
+					}
 				}
 			});
 		}
@@ -543,7 +551,7 @@
 		function readyFuncs() {
 			renameSideBarModalIds();
 			interceptHashChange();
-			scrollToTargetOnClick();
+			contactUsClick();
 			checkForQualify();
 			specifyOther();
 			addHTMLValidationToCF();
