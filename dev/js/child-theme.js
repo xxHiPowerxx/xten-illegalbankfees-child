@@ -78,7 +78,8 @@
 		}
 		function contactUsClick() {
 			$('[href*="#contact-us"]').on("click keyup", function (e) {
-				var key = e.key || e.keyCode;
+				var key = e.key || e.keyCode,
+					targetForm;
 				if (key) {
 					var enterKey = key === "Enter" || key === 13;
 					var spaceKey = key === " " || key === 32;
@@ -90,8 +91,10 @@
 				e.preventDefault();
 				if (body.hasClass("xten-mobile-menu-active")) {
 					sideBarModal.modal("show");
+					targetForm = sideBarModal;
 				} else {
 					var secondaryPosition = secondary.css('position');
+					targetForm = rightSidebar
 					if (
 						secondaryPosition !== 'fixed' &&
 						secondaryPosition !== 'absolute'
@@ -102,10 +105,9 @@
 							document.location.pathname + $(this).attr("href")
 						);
 						scrollToTarget(rightSidebar);
-					} else if ((visibleFormState = secondary.find('.formState.collapse.show')).length) {
-						visibleFormState.find('input:visible').first().focus();
 					}
 				}
+				targetForm.find('input:visible, select:visible, textarea:visible').first().focus();
 			});
 		}
 		function dynamicInput() {
