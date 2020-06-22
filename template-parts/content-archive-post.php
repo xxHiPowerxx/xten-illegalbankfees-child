@@ -11,22 +11,26 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'listed-post card-style content-area d-flex flex-column' ); ?>>
 	<div class="featured-image">
-		<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+		<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark" class="post-link landscape-img">
 			<?php
-			if ( has_post_thumbnail() ) :
-				the_post_thumbnail( 'archive-thumbnail' );
+			$image_id = get_post_thumbnail_id();
+			$wide_tall;
+			if ( $image_id ) :
+				$size = xten_get_optimal_image_size( $image_id, $size, array( 16, 9 ) );
+				if ( is_array( $size ) ) :
+					$wide_tall = xten_wide_tall_image( $size );
+				else :
+					$wide_tall = xten_wide_tall_image( get_post_thumbnail_id() );
+				endif;
+				the_post_thumbnail( $size, array( 'class' => 'skip-lazy ' . $wide_tall ) );
 			elseif ( get_theme_mod( 'default_post_image' ) ) :
-				echo wp_get_attachment_image( get_theme_mod( 'default_post_image' ), 'archive-thumbnail' );
+				echo wp_get_attachment_image( get_theme_mod( 'default_post_image' ), array( 450, null ) );
 			else :
-				?>
-				<?php
 				$thumb_id = get_post_thumbnail_id( get_the_ID() );
 				$alt      = esc_attr( get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) );
 				?>
 				<img src="<?php echo get_template_directory_uri(); ?>/images/426x240.png" class="attachment-archive-thumbnail" alt="<?php echo $alt; ?>" width="426" height="240" />
-				<?php
-			endif;
-			?>
+			<?php endif; ?>
 		</a>
 	</div>
 	<div class="post-body d-flex flex-column">
