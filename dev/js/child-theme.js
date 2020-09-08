@@ -110,11 +110,11 @@
 				targetForm.find('input:visible, select:visible, textarea:visible').first().focus();
 			});
 		}
-		function dynamicInput() {
+		function dynamicInput($formFilled) {
 			$('.dynamicInput').each(function () {
 				$(this).find('.dynamicInputField').each(function () {
-					var inputId = '#' + $(this).attr('data-input-id'),
-						getVal = $(inputId).first().val();
+					var dynamicInputTar = $formFilled.find('.dynamicInputTar').first(),
+						getVal = $(dynamicInputTar).val();
 					$(this).text(getVal);
 				});
 			});
@@ -163,7 +163,7 @@
 						$formStateResponse.collapse('show');
 					}
 
-					dynamicInput();
+					dynamicInput(form);
 					modal.modal('show');
 				});
 			});
@@ -220,6 +220,22 @@
 					}
 					addOtherOptionFunc();
 				});
+				textInput.on('blur', function(){
+					// Only Add other option on blur if the
+					// addOtherOption Button has not been tabbed to
+					setTimeout(function(){
+						if ( ! addOtherOption.is(':focus') ) {
+							addOtherOptionFunc();
+						} else {
+							// If it has been tabbed to, make sure that the function is
+							// triggered on the buttons blur event.
+							addOtherOption.one('blur', function(){
+								addOtherOptionFunc();
+							});
+						}
+					});
+				});
+
 				function checkForEmptyInput(elem) {
 					if (elem.val().length === 0) {
 						addOtherOption.attr('title', 'Cancel').attr('aria-label', 'Cancel');
