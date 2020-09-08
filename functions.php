@@ -179,3 +179,16 @@ function cf7_dynamic_select_active_investigations($choices, $args=array()) {
 	return $choices;
 } // end function cf7_dynamic_select_active_investigations
 add_filter('wpcf7_dynamic_select', 'cf7_dynamic_select_active_investigations', 10, 2);
+
+/**
+ * Change Sort order of investigation archive.
+ */
+function xten_change_investigation_archive_sort_order($query){
+	if( is_post_type_archive( 'investigations' ) ):
+		//Set the order ASC or DESC
+		$query->set( 'order', 'ASC' );
+		//Set the orderby
+		$query->set( 'orderby', 'title' );
+	endif;
+};
+add_action( 'pre_get_posts', 'xten_change_investigation_archive_sort_order'); 
