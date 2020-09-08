@@ -31,7 +31,7 @@ get_header(); ?>
 					wp_print_styles( array( 'xten-content-css' ) ); // Note: If this was already done it will be skipped.
 
 					global $wp_query;
-					$is_category = $wp_query->is_category;
+					$is_category         = $wp_query->is_category;
 					$is_custom_post_type = $wp_query->is_post_type_archive;
 
 					// If page is a Category Archive OR is Investigation Archive, get the thumbnail.
