@@ -37,8 +37,8 @@
 
 		<header class="entry-header">
 			<?php
-
-			if ( 'page' !== get_post_type() ) :
+			$post_type = get_post_type();
+			if ( 'page' !== $post_type ) :
 				?>
 				<div class="entry-meta xten-highlight-font">
 					<?php
@@ -47,10 +47,13 @@
 					else :
 						the_title( '<h5 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h5>' );
 					endif;
-					?>
-					<div class="post-date">
-						<?php echo xten_posted_on(); ?>
-					</div>
+					// Do not show date if investigation.
+					if ( 'investigations' !== $post_type ) :
+						?>
+						<div class="post-date">
+							<?php echo xten_posted_on(); ?>
+						</div>
+					<?php endif; // if ( 'investigations' === $post_type ) : ?>
 				</div><!-- .entry-meta -->
 				<?php
 			endif;
