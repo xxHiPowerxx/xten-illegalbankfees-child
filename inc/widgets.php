@@ -64,11 +64,14 @@ class contact_forms_widget extends WP_Widget {
 			echo $args['before_title'] . $title . $args['after_title'];
 		endif;
 
+		$queried_object = get_queried_object();
 		// Get Page Contact Form Override if exists.
-		$contact_form_override          = get_field( 'contact_form_override', get_queried_object() );
+		$contact_form_override          = get_field( 'contact_form_override', $queried_object );
 		// Get Contact Form requested.
 		$get_field_param                = 'widget_' . $widget_id;
 		$contact_form_category_repeater = get_field( 'contact_form_category_repeater', $get_field_param );
+		/*?><pre><?php var_dump(get_the_category(get_queried_object())); ?></pre><?php
+		exit;*/
 
 		if ( $contact_form_override || isset( $contact_form_category_repeater ) ) :
 			if ( $contact_form_override ) :
@@ -77,7 +80,15 @@ class contact_forms_widget extends WP_Widget {
 			elseif ( isset( $contact_form_category_repeater ) ) : // if ( ! $contact_form_override ) :
 				// If we are using the Repeater in the widget,
 				// we need to Find the Correct Associated Contact Form.
-				$page_category_id = get_the_category()[0]->term_id;
+				// var_dump(get_the_category($queried_object));
+				if ( isset( $queried_object->term_id ) ) :
+					$page_category_id = $queried_object->term_id;
+				elseif( ! empty( $category_array = get_the_category($queried_object) ) ):
+					// var_dump($category_array);
+					$page_category_id = $category_array[0]->term_id;
+				else:
+					$page_category_id = null;
+				endif;
 				// Set First Associated Contact Form as Default.
 				$found_contact_form = $contact_form_category_repeater[0];
 				// Then Loop through and find Correct Associated Contact Form if exists.
