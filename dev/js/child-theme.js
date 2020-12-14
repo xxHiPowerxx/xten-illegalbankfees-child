@@ -77,9 +77,35 @@
 			});
 		}
 		function contactUsClick() {
-			$('[href*="#contact-us"]').on("click keyup", function (e) {
-				var key = e.key || e.keyCode,
-					targetForm;
+			var _hash = '#contact-us';
+			function coreFunc($this) {
+				var targetForm;
+				if (body.hasClass("xten-mobile-menu-active")) {
+					sideBarModal.modal("show");
+					targetForm = sideBarModal;
+				} else {
+					var secondaryPosition = secondary.css('position');
+					targetForm = rightSidebar;
+					if (
+						secondaryPosition !== 'fixed' &&
+						secondaryPosition !== 'absolute'
+					) {
+						scrollToTarget(rightSidebar);
+					}
+				}
+				// $this is only defined on the click/keyup events
+				// Not the initial load _hash check usage.
+				if ( $this !== undefined ) {
+					history.replaceState(
+						null,
+						null,
+						document.location.pathname + $this.attr("href")
+					);
+				}
+				targetForm.find('input:visible, select:visible, textarea:visible').first().focus();
+			}
+			$('[href*="' + _hash + '"]').on("click keyup", function (e) {
+				var key = e.key || e.keyCode;
 				if (key) {
 					var enterKey = key === "Enter" || key === 13;
 					var spaceKey = key === " " || key === 32;
@@ -89,26 +115,12 @@
 				}
 				e.stopImmediatePropagation();
 				e.preventDefault();
-				if (body.hasClass("xten-mobile-menu-active")) {
-					sideBarModal.modal("show");
-					targetForm = sideBarModal;
-				} else {
-					var secondaryPosition = secondary.css('position');
-					targetForm = rightSidebar
-					if (
-						secondaryPosition !== 'fixed' &&
-						secondaryPosition !== 'absolute'
-					) {
-						history.replaceState(
-							null,
-							null,
-							document.location.pathname + $(this).attr("href")
-						);
-						scrollToTarget(rightSidebar);
-					}
-				}
-				targetForm.find('input:visible, select:visible, textarea:visible').first().focus();
+				coreFunc( $(this) );
 			});
+			// Fire on Load if location hash is _hash
+			if ( location.hash === _hash ) {
+				coreFunc();
+			}
 		}
 		function dynamicInput($formFilled) {
 			$('.dynamicInput').each(function () {
@@ -344,8 +356,37 @@
 						sideBarForm = sideBarFormWrapper.children('.wpcf7-form'),
 						sizer = sideBarForm.find('.sizer'),
 						sideBarHeight = 0,
-						sideBarWidth = 'auto';
+						sideBarWidth = 'auto',
+						windowHeight = window.innerHeight,
+						maxHeight;
+					// console.log('thisSecondary', thisSecondary);
+					// console.log('sideBarFormWrapper', sideBarFormWrapper);
+					// console.log('sideBarForm', sideBarForm);
+					// console.log('sideBarForm', sideBarForm);
+					if ( isRightSideBar ) {
+						var sideBarFormPositionTop = Math.max( 0, sideBarForm[0].getBoundingClientRect().top ),
+						padTargetClass = isRightSideBar ?
+							'.main-container' :
+							'.xten-modal',
+						padTarget = sideBarForm.closest(padTargetClass),
+						padTargetMarginTop = 0;
+						if ( padTarget.length ) {
+							var padTargetComputedStyle = getComputedStyle( padTarget[0] );
+							padTargetMarginTop = parseInt( padTargetComputedStyle.marginTop ) + parseInt( padTargetComputedStyle.paddingTop );
+							// If Modal add padding bottom.
+							// if ( ! isRightSideBar ) {
+							// 	padTargetMarginTop += parseInt( padTargetComputedStyle.paddingBottom );
+							// }
+						}
 
+						maxHeight = windowHeight - sideBarFormPositionTop - padTargetMarginTop;
+
+					}
+					// console.log('windowHeight', windowHeight);
+					// console.log('sideBarFormPositionTop', sideBarFormPositionTop);
+					// console.log('padTarget', padTarget);
+					// console.log('padTargetMarginTop', padTargetMarginTop);
+					// console.log('maxHeight', windowHeight - sideBarFormPositionTop - padTargetMarginTop);
 					if (isRightSideBar && thisSecondary.css('position') === 'fixed') {
 						sideBarWidth = 0;
 						var sideBarParentComputedStyle = getComputedStyle(this),
@@ -376,10 +417,48 @@
 					});
 					sideBarWidth = sideBarWidth === 0 ? 'auto' : sideBarWidth;
 					sideBarFormWrapper.width(sideBarWidth);
-					sideBarForm.height(sideBarHeight);
+					sideBarForm.css({
+						'height': sideBarHeight,
+						'max-height': maxHeight + 'px'
+					});
+					// console.log('maxHeight', maxHeight);
+					// console.log('sideBarForm', sideBarForm);
+					// console.log('sideBarForm.css("max-height")', sideBarForm.css("max-height"));
 					finishWork(this);
 				}// endif ( formState.length ) {
 			});
+		}
+		function contentAboveOrBelow($tar) {
+			// Check if $tar is scrollable first.
+			var childHeight = $tar[0].scrollHeight,
+					tarHeight = $tar[0].clientHeight;
+			if ( childHeight > tarHeight ) {
+				var tarScrollTop = $tar.scrollTop(),
+					overlayHeight = tarHeight * .15;
+				// overlay is not gettable by js so we use the arbitrary number 15%.
+				// if ( tarScrollTop <= overlayHeight ) {
+				if ( tarScrollTop <= 0 ) {
+					$tar.removeClass('contentAbove');
+				} else {
+					$tar.addClass('contentAbove');
+				}
+				console.log('tarScrollTop', tarScrollTop);
+				console.log('tarHeight', tarHeight);
+				console.log('tarScrollTop + tarHeight', tarScrollTop + tarHeight);
+				console.log('childHeight', childHeight);
+				// if ( tarScrollTop + tarHeight > childHeight - overlayHeight ) {
+				if ( tarScrollTop + tarHeight >= childHeight ) {
+					$tar.removeClass('contentBelow');
+				} else {
+					$tar.addClass('contentBelow');
+				}
+			}
+		}
+		function contentAboveOrBelowFormStateContent() {
+			$('.formState-content').on('scroll', function(){
+				console.log('im scrollin');
+				contentAboveOrBelow($(this));
+			}).trigger('scroll');
 		}
 		function scrollSpySideBar() {
 			rightSidebar.each(function () {
@@ -583,6 +662,7 @@
 			invalidFormState();
 			triggerClickOnClick();
 			displayFileNamesOfInput();
+			// contentAboveOrBelowFormStateContent();
 		}
 		readyFuncs();
 		function resizeFuncs() {
