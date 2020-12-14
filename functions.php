@@ -151,8 +151,10 @@ function xten_get_active_investigations( $posts = null, $category_args = null ) 
 							'numberposts' => -1,
 							'post_type'   => $post_type,
 							'meta_key'    => 'active_investigation',
-							'meta_value'	=> true,
+							'meta_value'  => true,
 							'category'    => $category_id,
+							'orderby'     => 'title',
+							'order'       => 'ASC',
 							)
 						);
 	endif; // endif ( $posts === null ) :
@@ -192,3 +194,47 @@ function xten_change_investigation_archive_sort_order($query){
 	endif;
 };
 add_action( 'pre_get_posts', 'xten_change_investigation_archive_sort_order'); 
+
+/**
+ * Show all Investigations on Investigations Archive Page
+ */
+function xten_show_all_investigations( $query ) {
+    if (
+			! is_admin() &&
+			$query->is_main_query() &&
+			is_post_type_archive( 'investigations' )
+		) :
+			$query->set( 'posts_per_page', '-1');
+		endif;
+}
+add_action( 'pre_get_posts', 'xten_show_all_investigations' );
+
+
+/**
+ * Find Select Tags in WPCF7 forms and
+ * set size attribute to options Length up to a maximum of 5.
+ * @link https://stackoverflow.com/questions/46274317/how-to-add-a-custom-attribute
+ * @link https://stackoverflow.com/questions/9478330/php-how-can-i-retrieve-a-div-tag-attribute-value
+ * @link https://www.php.net/manual/en/book.dom.php
+ *
+ * @param string - $content - The html loaded from WPCF7 Shortcodes
+ * @return string - returns doc $content after size attribute has been added to select tags.
+ */
+function xten_add_size_to_wpcf7_multiple_select( $content ) {
+	$doc     = DOMDocument::loadHTML($content);
+	$xpath   = new DOMXPath($doc);
+	$query   = "//select[@multiple]";
+	$entries = $xpath->query($query);
+	// we are replacing content with the Doc Body's children
+	foreach ($entries as $entry) :
+		$size_val = $entry->childNodes->length < 5 ?
+			$entry->childNodes->length
+			: 5;
+		$entry->setAttribute( 'size', $size_val );
+	endforeach;
+	$doc_body    = $doc->getElementsByTagName('body')->childNodes;
+	$new_content = $doc->saveHTML( $doc_body );
+
+	return $new_content;
+}
+add_filter( 'wpcf7_form_elements', 'xten_add_size_to_wpcf7_multiple_select' );
