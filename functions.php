@@ -238,3 +238,39 @@ function xten_add_size_to_wpcf7_multiple_select( $content ) {
 	return $new_content;
 }
 add_filter( 'wpcf7_form_elements', 'xten_add_size_to_wpcf7_multiple_select' );
+
+
+//--------------- Referer code for contact form 7
+function getIP() {
+	$sProxy = '';
+	if ( getenv( 'HTTP_CLIENT_IP' ) ) {
+			$sProxy = $_SERVER['REMOTE_ADDR'];
+			$sIP    = getenv( 'HTTP_CLIENT_IP' ) ;
+	} elseif( $_SERVER['HTTP_X_FORWARDED_FOR'] ) {
+			$sProxy = $_SERVER['REMOTE_ADDR'];
+			$sIP    = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+			$sIP    = $_SERVER['REMOTE_ADDR'];
+	}
+	if ( ! empty( $sProxy ) ) {
+			$sIP = $sIP . 'via-proxy:' . $sProxy;
+	}
+	return $sIP;
+}
+function setRefererTransient( $uniqueID ) {
+	if ( false === ( $void = get_transient( $uniqueID ) ) ) {
+			// set a transient for 2 hours
+			set_transient( $uniqueID, $_SERVER['HTTP_REFERER'], 60*60*2 );
+	}
+}
+function getReferrerPage( $form_tag ) {
+	if ( $form_tag['name'] == 'referrer-page' ) {
+			$uniqueID = getIP();
+			setRefererTransient( $uniqueID );
+			$form_tag['values'][] =  get_transient( $uniqueID );
+	}
+	return $form_tag;
+}
+if ( !is_admin() ) {
+	add_filter( 'wpcf7_form_tag', 'getReferrerPage' );
+}
