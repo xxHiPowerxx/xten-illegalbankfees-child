@@ -20,17 +20,6 @@ include get_stylesheet_directory() . '/inc/modals.php';
 	$site_info_content = ( ! $site_info_content ) ? $site_info_default : $site_info_content;
 
 	// Site Footer Variables //
-
-	if ( have_rows( 'department_contact_info', 'option' ) ) :
-		while ( have_rows( 'department_contact_info', 'option' ) ) :
-			the_row();
-			$department_address       = wp_kses_post( get_sub_field( 'department_main_address' ) );
-			$department_phone         = esc_attr( get_sub_field( 'department_phone' ) );
-			$department_fax_number    = esc_attr( get_sub_field( 'department_fax_number' ) );
-			$department_email_address = esc_attr( get_sub_field( 'department_email_address' ) );
-			$tty_users                = esc_attr( get_sub_field( 'tty_users' ) );
-		endwhile;
-	endif;
 	if ( have_rows( 'social_media_accounts', 'option' ) ) :
 		while ( have_rows( 'social_media_accounts', 'option' ) ) :
 			the_row();
@@ -76,48 +65,21 @@ include get_stylesheet_directory() . '/inc/modals.php';
 								</div>
 							</a>
 						</div>
-					<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) || ! empty( $department_address ) || ! empty( $department_phone ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
+					<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) ) : ?>
 						<div class="site-footer-content">
 							<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) ) : ?>
-							<div class="social-media-wrapper">
-								<?php
-								echo '<div class="social-icons">';
-									echo ( ! empty( $facebook_account ) ) ? $facebook_profile : null;
-									echo ( ! empty( $twitter_account ) ) ? $twitter_profile : null;
-									echo ( ! empty( $youtube_account ) ) ? $youtube_profile : null;
-									echo ( ! empty( $instagram_account ) ) ? $instagram_profile : null;
-									echo ( ! empty( $linkedin_account ) ) ? $linkedin_profile : null;
-								echo '</div>';
-								?>
-							</div>
-							<?php endif; ?>
-						<?php if ( ! empty( $department_address ) || ! empty( $department_phone ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
-							<div class="department-info">
-								<?php if ( ! empty( $department_address ) ) : ?>
-									<div class="address-area">
-										<?php if ( ! empty( $department_address ) ) : ?>
-											<?php echo $department_address; ?><br>
-										<?php endif; ?>
-									</div>
-								<?php endif; ?>
-							<?php if ( ! empty( $department_phone ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
-								<div class="contact-info">
-									<?php if ( ! empty( $department_phone ) ) : ?>
-										Phone: <?php echo $department_phone; ?><br>
-									<?php endif; ?>
-									<?php if ( ! empty( $department_fax_number ) ) : ?>
-										Fax:   <?php echo $department_fax_number; ?><br>
-									<?php endif; ?>
-									<?php if ( ! empty( $department_email_address ) ) : ?>
-										Email: <a href="mailto:<?php echo $department_email_address; ?>"><?php echo $department_email_address; ?></a><br>
-									<?php endif; ?>
-									<?php if ( ! empty( $tty_users ) ) : ?>
-										TTY:   <?php echo $tty_users; ?>
-									<?php endif; ?>
+								<div class="social-media-wrapper">
+									<?php
+									echo '<div class="social-icons">';
+										echo ( ! empty( $facebook_account ) ) ? $facebook_profile : null;
+										echo ( ! empty( $twitter_account ) ) ? $twitter_profile : null;
+										echo ( ! empty( $youtube_account ) ) ? $youtube_profile : null;
+										echo ( ! empty( $instagram_account ) ) ? $instagram_profile : null;
+										echo ( ! empty( $linkedin_account ) ) ? $linkedin_profile : null;
+									echo '</div>';
+									?>
 								</div>
 							<?php endif; ?>
-							</div>
-						<?php endif; ?>
 						</div>
 
 						<?php if ( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' ) || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) ) : ?>

@@ -1,5 +1,5 @@
 <?php
-$site_name                 = $GLOBALS['department_name'];
+$site_name                 = esc_attr( get_bloginfo() );
 $menu_name                 = 'primary';
 $locations                 = get_nav_menu_locations();
 $menu_items                = null;
