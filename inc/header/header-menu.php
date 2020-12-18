@@ -18,7 +18,7 @@ if ( $locations && isset( $locations[ $menu_name ] ) ) :
 	// Store result in variable to be later used to validate .mobile-navigation.
 ?>
 <div id="menu-wrapper" class="<?php echo esc_attr( $header_selection_class ); ?>" data-mobile-nav-breakpoint="<?php echo esc_attr( $mobile_nav_breakpoint ); ?>">
-	<div id="mobile-sidebar" class="mobile-sidebar"> <!-- Mobile Nav -->
+	<div id="mobile-sidebar" class="mobile-sidebar collapse"> <!-- Mobile Nav -->
 		<?php
 		$is_mobile_gobal_nav = true;
 
