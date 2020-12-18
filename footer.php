@@ -19,7 +19,7 @@ include get_stylesheet_directory() . '/inc/modals.php';
 	$site_info_default = do_shortcode( wp_kses_post( '[site-info-default]' ) );
 	$site_info_content = ( ! $site_info_content ) ? $site_info_default : $site_info_content;
 
-	// Standard Footer Variables //
+	// Site Footer Variables //
 
 	if ( have_rows( 'department_contact_info', 'option' ) ) :
 		while ( have_rows( 'department_contact_info', 'option' ) ) :
@@ -49,12 +49,12 @@ include get_stylesheet_directory() . '/inc/modals.php';
 		$linkedin_profile  = '<a class="linkedin" target="_blank" aria-label="Visit Our Linkedin Profile" href="' . $linkedin_account . '"><i aria-hidden="true" class="fab fa-linkedin-in" title="Visit Our Linkedin Profile"></i><span class="sr-only">Visit Our Linkedin Profile</span></a>';
 	endif;
 
-	// /Standard Footer Variables //
+	// /Site Footer Variables //
 
-	// Standard Footer   //
+	// Site Footer   //
 		// $site_info_content = $site_info_default;
 	?>
-		<footer id="colophon" class="site-footer standard-site-footer">
+		<footer id="colophon" class="site-footer">
 			<div class="container container-ext footer-container">
 				<div class="footer-content-wrapper flex-column">
 					<div class="site-logo-wrapper">
@@ -77,7 +77,7 @@ include get_stylesheet_directory() . '/inc/modals.php';
 							</a>
 						</div>
 					<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) || ! empty( $department_address ) || ! empty( $department_phone ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
-						<div class="standard-footer-content">
+						<div class="site-footer-content">
 							<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) ) : ?>
 							<div class="social-media-wrapper">
 								<?php

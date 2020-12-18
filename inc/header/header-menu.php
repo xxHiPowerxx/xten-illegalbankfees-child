@@ -3,9 +3,6 @@ $site_name                 = $GLOBALS['department_name'];
 $menu_name                 = 'primary';
 $locations                 = get_nav_menu_locations();
 $menu_items                = null;
-$standard_header_selection = $GLOBALS['internet_or_xtenline'];
-$header_selection_name     = str_replace( '_', '-', $standard_header_selection );
-$header_selection_class    = 'xten-' . $header_selection_name;
 $mobile_nav_breakpoint     = $GLOBALS['mobile_nav_breakpoint'];
 
 

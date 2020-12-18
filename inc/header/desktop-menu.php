@@ -1,11 +1,11 @@
 <?php
 /**
- * Standard Header included if Legacy Header is not Selected in Standard Header Options.
+ * Site Header included if Legacy Header is not Selected in Site Header Options.
  *
  * @package xten
  */
 
-wp_enqueue_style( 'xten-standard-header-css' );
+wp_enqueue_style( 'xten-site-header-css' );
 
 $global_xten_header_file = $GLOBALS['global_xten_header_file'];
 $site_name                 = $GLOBALS['department_name'];
@@ -18,13 +18,13 @@ $style                     =
 		'src: url(' . $root_dir . '/assets/fonts/' . $font . '/' . $font . '.ttf);' .
 	'}' .
 	'@media (min-width:' . $mobile_nav_breakpoint . 'px ){' .
-		'.xten-standard-header .site-branding{' .
+		'.xten-site-header .site-branding{' .
 			'margin-right:6rem;' .
 		'}' .
 	'}';
-wp_register_style( 'xten-standard-header-inline-style', false );
-wp_enqueue_style( 'xten-standard-header-inline-style', '', 'xten-content-css' );
-wp_add_inline_style( 'xten-standard-header-inline-style', $style );
+wp_register_style( 'xten-site-header-inline-style', false );
+wp_enqueue_style( 'xten-site-header-inline-style', '', 'xten-content-css' );
+wp_add_inline_style( 'xten-site-header-inline-style', $style );
 ?>
 <header id="masthead" class="site-header new-site-header fixed-header">
 	<div class="navbar" id="mainNav">

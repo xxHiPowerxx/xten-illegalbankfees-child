@@ -20,7 +20,7 @@ function enqueue_child_styles() {
 
 		// Register Styles
 		$child_theme_css_path = '/assets/css/child-theme.min.css';
-		wp_register_style( 'child-theme-css', get_stylesheet_directory_uri() . $child_theme_css_path, array( 'xten-base-style', 'xten-standard-header-css' ), filemtime( get_stylesheet_directory() . $child_theme_css_path ), 'all' );
+		wp_register_style( 'child-theme-css', get_stylesheet_directory_uri() . $child_theme_css_path, array( 'xten-base-style', 'xten-site-header-css' ), filemtime( get_stylesheet_directory() . $child_theme_css_path ), 'all' );
 
 		// Register Scripts
 		$child_theme_js_path = '/assets/js/child-theme.min.js';

@@ -7,12 +7,10 @@
 /*   Parent Theme Overrides   */
 /*   Site-Header   */
 #menu-wrapper {
-	&.xten-standard-internet-header {
-		.site-header {
-			@at-root .mobile-sidebar-top,
-				& {
-				background-color: $primary;
-			}
+	.site-header {
+		@at-root .mobile-sidebar-top,
+			& {
+			background-color: $primary;
 		}
 	}
 }
@@ -224,45 +222,43 @@ html {
 /*   Site Footer   */
 /*   Social Icons   */
 .site-footer {
-	&.standard-site-footer {
-		.standard-footer-content {
-			.social-media-wrapper {
-				.social-icons {
-					a {
-						font-size: 2.8rem;
-						border: 0.1em
-							solid
-							$white;
-						opacity: 1;
-						padding: 0.25em;
+	.site-footer-content {
+		.social-media-wrapper {
+			.social-icons {
+				a {
+					font-size: 2.8rem;
+					border: 0.1em
+						solid
+						$white;
+					opacity: 1;
+					padding: 0.25em;
+					border-radius: 0.25em
+						0.25em
+						0
+						0.25em;
+					#{$active} {
 						border-radius: 0.25em
 							0.25em
 							0
 							0.25em;
-						#{$active} {
-							border-radius: 0.25em
-								0.25em
-								0
-								0.25em;
-							border-color: $primary-dark;
-							color: $primary-dark;
-							background-color: $white;
-							box-shadow: 0
-								0.2em
-								0.2em
-								rgba(
-									$darker,
-									0.35
-								);
-						}
-						.fab {
-							width: 1em;
-							height: 1em;
-						}
+						border-color: $primary-dark;
+						color: $primary-dark;
+						background-color: $white;
+						box-shadow: 0
+							0.2em
+							0.2em
+							rgba(
+								$darker,
+								0.35
+							);
 					}
-					> :not(:first-child) {
-						margin-left: 1em;
+					.fab {
+						width: 1em;
+						height: 1em;
 					}
+				}
+				> :not(:first-child) {
+					margin-left: 1em;
 				}
 			}
 		}
@@ -959,24 +955,22 @@ body {
 }
 /*   Footer    */
 .site-footer {
-	&.standard-site-footer {
-		background: linear-gradient(
-			to
-				bottom,
-			$primary
-				0%,
-			$primary-darker
-				100%
-		);
-		.site-info-footer-wrapper {
-			.site-info {
-				color: $white;
-				a {
-					color: inherit;
-					@extend .smooth-transition;
-					#{$active} {
-						color: $secondary;
-					}
+	background: linear-gradient(
+		to
+			bottom,
+		$primary
+			0%,
+		$primary-darker
+			100%
+	);
+	.site-info-footer-wrapper {
+		.site-info {
+			color: $white;
+			a {
+				color: inherit;
+				@extend .smooth-transition;
+				#{$active} {
+					color: $secondary;
 				}
 			}
 		}
