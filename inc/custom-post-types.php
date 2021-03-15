@@ -84,7 +84,6 @@ function custom_post_types() {
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
 			'capability_type'     => 'post',
-			'show_in_rest'        => true,
 			'menu_icon'           => $menu_icon,
 			'rewrite'             => array(
 															 	'slug'       => $post_handle,
