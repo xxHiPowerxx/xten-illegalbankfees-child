@@ -462,6 +462,14 @@ $weird-content-padding: 1.5rem;
 		}
 	}
 }
+.entry-content {
+	> .section {
+		padding-bottom: 6rem;
+		&:not(:first-child) {
+			padding-top: 6rem;
+		}
+	}
+}
 /*   /Blog Post/Home Page   */
 
 /*   Contact Form   */
