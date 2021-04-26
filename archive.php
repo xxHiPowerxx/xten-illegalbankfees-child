@@ -13,7 +13,7 @@ get_header(); ?>
 	<?php
 	$sidebar_location = get_theme_mod( 'sidebar_location', 'sidebar_right' );
 	$column           = '';
-	if ( 'none' !== $sidebar_location ) {
+	if ( 'sidebar_none' !== $sidebar_location ) {
 		$column = '-xl-8';
 	};
 	?>
@@ -88,7 +88,7 @@ get_header(); ?>
 							endif; // endif ( $archive_thumbnail ) :
 							if ( $archive_description ) :
 								 ?>
-								<div class="archive-description">
+								<div class="archive-description pad-6">
 									<?php echo $archive_description; ?>
 								</div>
 							<?php
