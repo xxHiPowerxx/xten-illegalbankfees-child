@@ -70,7 +70,7 @@ wp_add_inline_style( 'xten-site-header-inline-style', $style );
 					<i class="fas fa-search"></i>
 				</button>
 			<?php	endif; ?>
-			<button class="btn btn-theme-style theme-style-white" id="show-sidebar-modal" data-toggle="modal" data-target="#sidebar-modal" type="button">
+			<button class="btn btn-theme-style theme-style-white" id="show-contact-form" data-open="gideon-chat-bot" type="button">
 				<span class="btn-text">Connect</span>
 			</button>
 			<button id="mobile-nav-open" class="mobile-toggler collapsed" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle navigation" tabindex="0" data-target="#mobile-sidebar">
