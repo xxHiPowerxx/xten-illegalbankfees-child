@@ -8,7 +8,7 @@
  */
 
 $get_the_title = wp_kses_post( get_field( 'page_heading_override', false, false ) );
-if ( ! $get_the_title ) :
+if ( ! $get_the_title && get_post_type() !== 'post' ) :
 	$title    = get_the_title();
 	$post_categories = get_the_category();
 	foreach ( $post_categories as $post_category ) :
@@ -20,7 +20,7 @@ if ( ! $get_the_title ) :
 	endforeach;
 	$get_the_title = $default_investigation_heading;
 	$get_the_title = str_replace('${title}', $title, $get_the_title );
-endif;
+endif; // endif ( ! $get_the_title && get_post_type() !== 'post' ) :
 if ( ! $get_the_title ) :
 	$get_the_title = '<h1 class="entry-title">' . get_the_title() . '</h1>';
 endif;
@@ -43,7 +43,7 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 							echo $get_the_title;
 							if ( $featured_image_cta_button_text ) :
 								?>
-								<button data-toggle="modal" data-target="#sidebar-modal" type="button" class="btn btn-theme-style xten-btn theme-style-white xten-mobile-menu-inactive-hide xten-mobile-menu-active-show"><?php echo $featured_image_cta_button_text; ?></button>
+								<button data-open="gideon-chat-bot" type="button" class="btn btn-theme-style xten-btn theme-style-white xten-mobile-menu-inactive-hide xten-mobile-menu-active-show"><?php echo $featured_image_cta_button_text; ?></button>
 							<?php endif; ?>
 						</div>
 					</div>
@@ -73,7 +73,7 @@ $featured_image_cta_button_text = esc_attr( get_field('featured_image_cta_button
 		?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content">
+	<div class="entry-content pad-6">
 		<?php
 
 		the_content(
