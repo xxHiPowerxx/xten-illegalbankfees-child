@@ -76,34 +76,50 @@
 				}
 			});
 		}
-		function contactUsClick() {
-			var _hash = '#contact-us';
-			function coreFunc($this) {
-				var targetForm;
-				if (body.hasClass("xten-mobile-menu-active")) {
-					sideBarModal.modal("show");
-					targetForm = sideBarModal;
-				} else {
-					var secondaryPosition = secondary.css('position');
-					targetForm = rightSidebar;
-					if (
-						secondaryPosition !== 'fixed' &&
-						secondaryPosition !== 'absolute'
-					) {
-						scrollToTarget(rightSidebar);
+		function toggleGideonChatBot() {
+			$('.wc-floating-wrap:visible').first().trigger('click');
+		}
+		function triggerGideonChatBot() {
+			$('[data-open="gideon-chat-bot"').on("click keyup", function (e) {
+				var key = e.key || e.keyCode;
+				if (key) {
+					var enterKey = key === "Enter" || key === 13;
+					var spaceKey = key === " " || key === 32;
+					if (!(enterKey || spaceKey)) {
+						return;
 					}
 				}
-				// $this is only defined on the click/keyup events
-				// Not the initial load _hash check usage.
-				if ( $this !== undefined ) {
-					history.replaceState(
-						null,
-						null,
-						document.location.pathname + $this.attr("href")
-					);
-				}
-				targetForm.find('input:visible, select:visible, textarea:visible').first().focus();
-			}
+				toggleGideonChatBot();
+			});
+		}
+		function contactUsClick() {
+			var _hash = '#contact-us';
+			// function coreFunc($this) {
+			// 	var targetForm;
+			// 	if (body.hasClass("xten-mobile-menu-active")) {
+			// 		sideBarModal.modal("show");
+			// 		targetForm = sideBarModal;
+			// 	} else {
+			// 		var secondaryPosition = secondary.css('position');
+			// 		targetForm = rightSidebar;
+			// 		if (
+			// 			secondaryPosition !== 'fixed' &&
+			// 			secondaryPosition !== 'absolute'
+			// 		) {
+			// 			scrollToTarget(rightSidebar);
+			// 		}
+			// 	}
+			// 	// $this is only defined on the click/keyup events
+			// 	// Not the initial load _hash check usage.
+			// 	if ( $this !== undefined ) {
+			// 		history.replaceState(
+			// 			null,
+			// 			null,
+			// 			document.location.pathname + $this.attr("href")
+			// 		);
+			// 	}
+			// 	targetForm.find('input:visible, select:visible, textarea:visible').first().focus();
+			// }
 			$('[href*="' + _hash + '"]').on("click keyup", function (e) {
 				var key = e.key || e.keyCode;
 				if (key) {
@@ -115,11 +131,13 @@
 				}
 				e.stopImmediatePropagation();
 				e.preventDefault();
-				coreFunc( $(this) );
+				toggleGideonChatBot();
+				// coreFunc( $(this) );
 			});
 			// Fire on Load if location hash is _hash
 			if ( location.hash === _hash ) {
-				coreFunc();
+				// coreFunc();
+				toggleGideonChatBot();
 			}
 		}
 		function dynamicInput($formFilled) {
@@ -648,6 +666,7 @@
 		function readyFuncs() {
 			renameSideBarModalIds();
 			interceptHashChange();
+			triggerGideonChatBot();
 			contactUsClick();
 			checkForQualify();
 			specifyOther();
