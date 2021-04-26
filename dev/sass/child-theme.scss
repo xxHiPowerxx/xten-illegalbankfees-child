@@ -452,6 +452,7 @@ $weird-content-padding: 1.5rem;
 			position: relative;
 			@at-root body.xten-mobile-menu-inactive & {
 				position: absolute;
+				min-height: initial;
 			}
 		}
 		.entry-title {
@@ -868,7 +869,7 @@ form .input-invalid,
 	z-index: 8000;
 }
 
-#show-sidebar-modal {
+#show-contact-form {
 	display: none;
 	text-align: center;
 	font-weight: 700;
@@ -1025,3 +1026,15 @@ body {
 	}
 }
 /*   /XTen Sections Overrides   */
+
+/*   Common   */
+.pad-6 {
+	padding: 1.5rem;
+	@media (min-width: $vp_xs) {
+		padding: 3rem;
+	}
+	@media (min-width: $vp_sm) {
+		padding: 6rem;
+	}
+}
+/*   /Common   */
