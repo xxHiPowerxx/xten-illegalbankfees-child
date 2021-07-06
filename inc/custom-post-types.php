@@ -111,7 +111,7 @@ function custom_post_types() {
 	// Get ACF Field created for Investigation Descriptions.
 	$investigation_description = get_field( 'investigations_description', 'option' ) ? : 'Investigations of Banks, Organizations, etc...';
 	// Use our utility function to render different Custom Post Types.
-	create_custom_post_type( 
+	create_custom_post_type(
 		'Investigation',
 		null,
 		$investigation_description,
