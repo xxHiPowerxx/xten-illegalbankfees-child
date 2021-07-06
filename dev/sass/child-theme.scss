@@ -1,10 +1,21 @@
 @import './import/variables';
-@media screen and (min-width: $vp_xxl) {
+
+.theme-border {
+	@include theme-border;
+}
+@media (min-width: $vp_xxl) {
 	.container.container-ext {
-		max-width: 1440px;
+		max-width: 144rem;
 	}
 }
 /*   Parent Theme Overrides   */
+/*   Typography   */
+h2,
+.xten-h2[class*="xten-h2"] {
+	@include reduceLargeFontsAtVPXS(3.6rem, $vp_sm);
+	@include reduceLargeFontsAtVPXS(4rem, $vp_lg);
+}
+/*   /Typography   */
 /*   Site-Header   */
 #menu-wrapper {
 	.site-header {
@@ -101,8 +112,9 @@
 		position: relative;
 		line-height: 1;
 		@at-root .xten-mobile-menu-active & {
-			max-width: 5.6em;
+			// max-width: 5.6em;
 			font-size: 1.68rem;
+			flex: 1 1 auto;
 			@media (min-width: $vp_sm) {
 				font-size: 2.9rem;
 			}
@@ -110,10 +122,12 @@
 				max-width: none;
 			}
 			text-align: center;
+			margin-left: 1%;
 		}
 		.site-phone-number {
 			display: block;
 			padding: 0.5em;
+			// white-space: normal;
 		}
 		&:before {
 			content: '';
@@ -469,6 +483,108 @@ $weird-content-padding: 1.5rem;
 		padding-bottom: 6rem;
 	}
 }
+
+.section {
+	padding-top: 6rem;
+	padding-bottom: 6rem;
+}
+.main-content {
+  // padding: 6rem;
+	@media (min-width: $vp_xs) {
+		margin-top: 6rem;
+		margin-bottom: 6rem;
+		padding-left: 3rem;
+		padding-right: 3rem;
+		padding-top: 6rem;
+		padding-bottom: 6rem;
+	}
+	@media (min-width: $vp_m) {
+		padding: 6rem;
+		padding-left: 6rem;
+		padding-right: 6rem;
+	}
+	.section {
+		@include theme-border($theme-border-radius-rem-lg);
+		border-color: $primary;
+		padding: 1.5rem;
+		@media (min-width: $vp_xs) {
+			padding: 3rem;
+		}
+		@media (min-width: $vp_m) {
+			padding: 6rem;
+		}
+		&:not(:first-child) {
+			margin-top: 1.5rem;
+			@media (min-width: $vp_xs) {
+				margin-top: 3rem;
+			}
+			@media (min-width: $vp_m) {
+				margin-top: 6rem;
+			}
+		}
+		&.attorney-advertising {
+			border: 0;
+			padding: 1.5rem;
+			@media (min-width: $vp_xs) {
+				padding: 3rem;
+			}
+			@media (min-width: $vp_m) {
+				padding: 6rem;
+			}
+			p {
+				font-size: inherit;
+			}
+		}
+	}
+	h2,
+	.xten-h2[class*="xten-h2"],
+	h3,
+	.xten-h3[class*="xten-h3"],
+	h4,
+	.xten-h4[class*="xten-h4"],
+	h5,
+	.xten-h5[class*="xten-h5"],
+	h6,
+	.xten-h6[class*="xten-h6"] {
+		color: $primary;
+	}
+	p,
+	ul,
+	ol {
+		font-size: 2.5rem;
+	}
+	p,
+	li {
+		&:not(:last-child) {
+			margin-bottom: 1em;
+		}
+	}
+}
+.attorney-advertising {
+	hyphens: manual;
+	font-size: 1.6rem;
+	padding: 1.5rem;
+	> * {
+		@include theme-border( $theme-border-radius-rem-lg );
+		padding: 1.5rem;
+	}
+	@media (min-width: $vp_xs) {
+		padding: 3rem;
+		> * {
+			padding: 3rem;
+		}
+	}
+	@media (min-width: $vp_m) {
+		padding: 6rem;
+		> * {
+			padding: 6rem;
+		}
+	}
+	h3 {
+		font-size: 1.15em;
+	}
+}
+
 /*   /Blog Post/Home Page   */
 
 /*   Contact Form   */
@@ -1036,5 +1152,75 @@ body {
 	@media (min-width: $vp_sm) {
 		padding: 6rem;
 	}
+}
+
+ul.cards-wrapper {
+	padding-left: 0;
+	list-style: none;
+}
+.cards-wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: -1.5em;
+  margin-right: -1.5em;
+	@at-root .main-content & {
+		font-size: 1.7rem;
+	}
+	> * {
+		// flex: 0 1 calc(33.333% - 0.5em);
+		flex: 0 1 calc(50% - 3em);
+		text-align: center;
+		// padding: .5em;
+		margin: 1.5em !important;
+		display: flex;
+		align-items: center;
+		min-width: 33.615rem;
+		position: relative;
+		@include card-style;
+	}
+	&.square-cards {
+		> * {
+			&:before {
+				content: '';
+				display: block;
+				width: 0;
+				padding-bottom: 100%;
+			}
+		}
+	}
+	&.landscape-cards {
+		> * {
+			&:before {
+				content: '';
+				display: block;
+				width: 0;
+				padding-bottom: 56.25%;
+			}
+		}
+	}
+	.card-inner {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		padding: 2em 1em;
+		&.clone {
+			position: absolute !important;
+			visibility: hidden !important;
+			height: auto !important;
+		}
+	}
+	.card-icon {
+		color: $primary;
+		font-size: 2.5em;
+		margin-bottom: .25em;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+	}
+}
+.card-content {
+  flex: 1;
 }
 /*   /Common   */

@@ -39,4 +39,28 @@ $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 
 $active: "&:hover,&:focus,&.active";
 
-$border-radius-theme-style: .25em .25em 0 .25em;
+$theme-border-radius: .25em .25em 0 .25em;
+
+$theme-border-radius-em: .25em .25em 0 .25em;
+$theme-border-radius-rem-sm: 1.5rem 1.5rem 0 1.5rem;
+$theme-border-radius-rem-lg: 3rem 3rem 0 3rem;
+@mixin theme-border( $border-radius: $theme-border-radius-em ) {
+	border: .5rem solid $white;
+	border-radius: $border-radius;
+}
+
+//largest size first, then scale down based on base font size reduction.
+@function reduceLargeFonts($font-size) {
+	$small-font-size: $font-size * 0.8333333333;
+	@return #{$small-font-size};
+}
+@mixin reduceLargeFontsAtVPXS($font-size, $vp) {
+	@media (min-width: $vp) {
+		font-size: $font-size;
+	}
+	font-size: reduceLargeFonts($font-size);
+}
+
+@mixin card-style {
+	box-shadow: 0 .1rem .25rem rgba(15, 15, 15, .35);
+}
