@@ -663,6 +663,28 @@
 				});
 			});
 		}
+		function sizeCards() {
+			$('.cards-wrapper').each(function(){
+				var tallest = 0,
+				$cards = $(this).children();
+				$cards.each(function(){
+					var $inner = $(this).children().first(),
+						$clone = $inner.clone();
+					$clone.css({
+						'visibility':'hidden',
+						'postition':'absolute',
+						'height':'auto'
+					}).
+					addClass('clone').
+					prependTo($(this));
+					var cloneHeight = $clone.outerHeight();
+					tallest = cloneHeight > tallest ? cloneHeight : tallest;
+					// if (cloneHeight)
+					$clone.remove();
+				});
+				$cards.height(tallest);
+			});
+		}
 		function readyFuncs() {
 			renameSideBarModalIds();
 			interceptHashChange();
@@ -682,10 +704,12 @@
 			triggerClickOnClick();
 			displayFileNamesOfInput();
 			// contentAboveOrBelowFormStateContent();
+			sizeCards();
 		}
 		readyFuncs();
 		function resizeFuncs() {
 			sizeSideBar();
+			sizeCards();
 		}
 		$(window).on('resize', function () {
 			resizeFuncs();
