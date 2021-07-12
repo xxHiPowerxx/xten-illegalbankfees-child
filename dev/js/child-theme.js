@@ -1,20 +1,24 @@
 // Write JS here
 (function ($) {
 	$(document).on("ready", function () {
-		var body = $("body"),
+		var windowLoaded = false,
+			body = $("body"),
 			sideBarModal = $("#sidebar-modal").first(),
-			bottomOut,
 			rightSidebar = $('#right-sidebar').first(),
 			secondary = rightSidebar.children('.primary-sidebar').first(),
 			sideBarParent = $([rightSidebar[0], $('#sidebar-modal')[0]]),
 			formStates = [];
 
 		sideBarParent.each(function () {
-			var thisFormStates = $(this).find('.formState');
+			var thisFormStates = $(this).find('.formState'),
+			scrollSpyChild = $(this).find('.makeSideBarScrollSpy').first();
 			this['formStates'] = thisFormStates;
 			if (thisFormStates.length) {
 				$(this).addClass('formStateParent');
 				formStates.push($(this));
+			}
+			if ( scrollSpyChild.length ) {
+				$(this).addClass('scrollSpyTarget')
 			}
 		});
 
@@ -364,86 +368,94 @@
 		}
 		function sizeSideBar() {
 			sideBarParent.each(function () {
-				if (formStates.length) {
-					startWork(this);
-					var thisSideBarParent = $(this),
-						isRightSideBar = $(this).is('#right-sidebar'),
-						// if is NOT right sidebar "secondary" has not yet been found.
-						thisSecondary = isRightSideBar ? secondary : $(this).find('.primary-sidebar').first(),
-						sideBarFormWrapper = thisSecondary.find('.wpcf7').first(),
-						sideBarForm = sideBarFormWrapper.children('.wpcf7-form'),
-						sizer = sideBarForm.find('.sizer'),
-						sideBarHeight = 0,
-						sideBarWidth = 'auto',
-						windowHeight = window.innerHeight,
-						maxHeight;
-					// console.log('thisSecondary', thisSecondary);
-					// console.log('sideBarFormWrapper', sideBarFormWrapper);
-					// console.log('sideBarForm', sideBarForm);
-					// console.log('sideBarForm', sideBarForm);
-					if ( isRightSideBar ) {
-						var sideBarFormPositionTop = Math.max( 0, sideBarForm[0].getBoundingClientRect().top ),
-						padTargetClass = isRightSideBar ?
-							'.main-container' :
-							'.xten-modal',
-						padTarget = sideBarForm.closest(padTargetClass),
-						padTargetMarginTop = 0;
-						if ( padTarget.length ) {
-							var padTargetComputedStyle = getComputedStyle( padTarget[0] );
-							padTargetMarginTop = parseInt( padTargetComputedStyle.marginTop ) + parseInt( padTargetComputedStyle.paddingTop );
-							// If Modal add padding bottom.
-							// if ( ! isRightSideBar ) {
-							// 	padTargetMarginTop += parseInt( padTargetComputedStyle.paddingBottom );
-							// }
-						}
-
-						maxHeight = windowHeight - sideBarFormPositionTop - padTargetMarginTop;
-
+				startWork(this);
+				var thisSideBarParent = $(this),
+					isRightSideBar = $(this).is('#right-sidebar'),
+					// if is NOT right sidebar "secondary" has not yet been found.
+					thisSecondary = isRightSideBar ? secondary : $(this).find('.primary-sidebar').first(),
+					sideBarFormWrapper = thisSecondary.find('.wpcf7').first(),
+					sideBarForm = sideBarFormWrapper.children('.wpcf7-form'),
+					sizer = sideBarForm.find('.sizer'),
+					sideBarHeight = 0,
+					sideBarWidth = 'auto',
+					windowHeight = window.innerHeight,
+					maxHeight;
+				// console.log('thisSecondary', thisSecondary);
+				// console.log('sideBarFormWrapper', sideBarFormWrapper);
+				// console.log('sideBarForm', sideBarForm);
+				// console.log('sideBarForm', sideBarForm);
+				if ( isRightSideBar ) {
+					var sideBarFormPositionTop = Math.max( 0, sideBarForm[0].getBoundingClientRect().top ),
+					padTargetClass = isRightSideBar ?
+						'.main-container' :
+						'.xten-modal',
+					padTarget = sideBarForm.closest(padTargetClass),
+					padTargetMarginTop = 0;
+					if ( padTarget.length ) {
+						var padTargetComputedStyle = getComputedStyle( padTarget[0] );
+						padTargetMarginTop = parseInt( padTargetComputedStyle.marginTop ) + parseInt( padTargetComputedStyle.paddingTop );
+						// If Modal add padding bottom.
+						// if ( ! isRightSideBar ) {
+						// 	padTargetMarginTop += parseInt( padTargetComputedStyle.paddingBottom );
+						// }
 					}
-					// console.log('windowHeight', windowHeight);
-					// console.log('sideBarFormPositionTop', sideBarFormPositionTop);
-					// console.log('padTarget', padTarget);
-					// console.log('padTargetMarginTop', padTargetMarginTop);
-					// console.log('maxHeight', windowHeight - sideBarFormPositionTop - padTargetMarginTop);
-					if (isRightSideBar && thisSecondary.css('position') === 'fixed') {
-						sideBarWidth = 0;
-						var sideBarParentComputedStyle = getComputedStyle(this),
-							sideBarParentInnerWidth = parseFloat(sideBarParentComputedStyle.width) - parseFloat(sideBarParentComputedStyle.paddingLeft) - parseFloat(sideBarParentComputedStyle.paddingRight),
-							secondaryWidth = secondary[0].getBoundingClientRect().width,
-							sideBarCurrentWidth = sideBarForm[0].getBoundingClientRect().width,
-							sidePadding = secondaryWidth - sideBarCurrentWidth,
-							sideBarWidth = sideBarParentInnerWidth - sidePadding;
-					} // endif ( sideBarParent.is('#right-sidebar') ) {
-					// Set the sideBarHeight to the tallest formState.
-					sizer.each(function () {
-						var sizeRef = $(this).find('.sizeRef'),
-							innerHeight = 0;
-						thisSideBarParent.addClass('sizing');
-						sizeRef.each(function () {
-							var computedStyle = getComputedStyle(this),
-								sizeRefHeight = this.getBoundingClientRect().height,
-								sizeRefMarginTop = parseFloat(computedStyle.marginTop),
-								sizeRefMarginBottom = parseFloat(computedStyle.marginBottom);
-							sizeRefOuterHeight = sizeRefHeight + sizeRefMarginTop + sizeRefMarginBottom;
 
-							innerHeight += sizeRefOuterHeight;
-						});
-						if (innerHeight > sideBarHeight) {
-							sideBarHeight = innerHeight;
-						}
-						thisSideBarParent.removeClass('sizing');
+					maxHeight = windowHeight - sideBarFormPositionTop - padTargetMarginTop;
+
+				}
+				// console.log('windowHeight', windowHeight);
+				// console.log('sideBarFormPositionTop', sideBarFormPositionTop);
+				// console.log('padTarget', padTarget);
+				// console.log('padTargetMarginTop', padTargetMarginTop);
+				// console.log('maxHeight', windowHeight - sideBarFormPositionTop - padTargetMarginTop);
+				if (
+					isRightSideBar &&
+					(
+						thisSecondary.css('position') === 'fixed' ||
+						thisSecondary.css('position') === 'absolute'
+					)
+				) {
+					sideBarWidth = 0;
+					var sideBarParentComputedStyle = getComputedStyle(this),
+						sideBarParentInnerWidth = parseFloat(sideBarParentComputedStyle.width) - parseFloat(sideBarParentComputedStyle.paddingLeft) - parseFloat(sideBarParentComputedStyle.paddingRight),
+						secondaryWidth = secondary[0].getBoundingClientRect().width,
+						sideBarCurrentWidth = sideBarForm[0].getBoundingClientRect().width,
+						sidePadding = secondaryWidth - sideBarCurrentWidth,
+						sideBarWidth = sideBarParentInnerWidth - sidePadding;
+				} // endif ( sideBarParent.is('#right-sidebar') ) {
+				// Set the sideBarHeight to the tallest formState.
+				sizer.each(function () {
+					var sizeRef = $(this).is('.sizeRef') ?
+						$(this) :
+						$(this).find('.sizeRef'),
+						innerHeight = 0;
+					thisSideBarParent.addClass('sizing');
+					sizeRef.each(function () {
+						var computedStyle = getComputedStyle(this),
+							sizeRefHeight = this.getBoundingClientRect().height,
+							sizeRefMarginTop = parseFloat(computedStyle.marginTop),
+							sizeRefMarginBottom = parseFloat(computedStyle.marginBottom);
+						sizeRefOuterHeight = sizeRefHeight + sizeRefMarginTop + sizeRefMarginBottom;
+
+						innerHeight += sizeRefOuterHeight;
 					});
-					sideBarWidth = sideBarWidth === 0 ? 'auto' : sideBarWidth;
-					sideBarFormWrapper.width(sideBarWidth);
-					sideBarForm.css({
-						'height': sideBarHeight,
-						'max-height': maxHeight + 'px'
-					});
-					// console.log('maxHeight', maxHeight);
-					// console.log('sideBarForm', sideBarForm);
-					// console.log('sideBarForm.css("max-height")', sideBarForm.css("max-height"));
-					finishWork(this);
-				}// endif ( formState.length ) {
+					if (innerHeight > sideBarHeight) {
+						sideBarHeight = innerHeight;
+					}
+					thisSideBarParent.removeClass('sizing');
+				});
+				sideBarWidth = sideBarWidth === 0 ? 'auto' : sideBarWidth;
+				var sideBarFormWidth = sideBarWidth === 0 ? $(this).width() : sideBarWidth;
+				sideBarFormWrapper.width(sideBarWidth);
+				sideBarForm.css({
+					'height': sideBarHeight,
+					'max-height': maxHeight + 'px',
+					'width': sideBarFormWidth
+				});
+				// console.log('maxHeight', maxHeight);
+				// console.log('sideBarForm', sideBarForm);
+				// console.log('sideBarForm.css("max-height")', sideBarForm.css("max-height"));
+				finishWork(this);
 			});
 		}
 		function contentAboveOrBelow($tar) {
@@ -478,43 +490,69 @@
 				contentAboveOrBelow($(this));
 			}).trigger('scroll');
 		}
+
+		function roundToTenth(num) {
+			return Math.round((num + Number.EPSILON) * 100) / 100;
+		}
+
 		function scrollSpySideBar() {
-			rightSidebar.each(function () {
+			rightSidebar.filter('.scrollSpyTarget').each(function () {
 				// See if Sidebar is actually on side.
-				var isSideBar = getComputedStyle(this).flexBasis;
+				var isSideBar = getComputedStyle(this).flexBasis,
+					bottomOut;
 				if (isSideBar !== 'auto') {
 					secondary.each(function () {
 						// offset().top is position of element relative to docuement.
 						var top = $(this).offset().top,
-							height = this.getBoundingClientRect().height,
+							rect = this.getBoundingClientRect(),
+							height = rect.height,
 							bottom = top + height,
-							ref = $('.main-container').first();
+							bottom = roundToTenth(bottom),
+							ref = $('.scrollSpyRef').first(),
+							fixedTop = '',
+							rightSidebarBottom = rightSidebar.offset().top + rightSidebar[0].getBoundingClientRect().height,
+							rightSidebarBottom = roundToTenth(rightSidebarBottom);
+
+						if ( bottom >= rightSidebarBottom ) {
+							body.addClass('scrollSpyBottomOut');
+							bottomOut = true;
+						}
+
 						// If bottomOut look for top.
 						if (bottomOut) {
-							var rect = this.getBoundingClientRect(),
-								rectTop = rect.top,
-								refOffsetTop = ref.offset().top;
+							var rectTop = roundToTenth(rect.top),
+								siteHeaderHeight = window.siteHeaderHeight
+									? parseFloat(window.siteHeaderHeight)
+									: $(".site-header")[0].getBoundingClientRect().height,
+								refOffsetTop = rightSidebar.offset().top - ref.offset().top + siteHeaderHeight,
+								refOffsetTop = roundToTenth(refOffsetTop);
 							if (rectTop <= refOffsetTop) {
 								body.addClass('scrollSpyBottomOut');
 								bottomOut = true;
 							} else {
 								body.removeClass('scrollSpyBottomOut');
 								bottomOut = false;
+								fixedTop = refOffsetTop;
 							}
 						} else {
-							// position().top is position of element relative to viewport.
-							var refTop = ref.position().top,
-								refComputedStyle = getComputedStyle(ref[0]),
-								refHeight = parseFloat(refComputedStyle.paddingTop) + parseFloat(refComputedStyle.paddingBottom) + parseFloat(refComputedStyle.height),
-								refBottom = refTop + refHeight;
-							if (bottom >= refBottom) {
-								body.addClass('scrollSpyBottomOut');
-								bottomOut = true;
+							var siteHeaderHeight = window.siteHeaderHeight
+									? parseFloat(window.siteHeaderHeight)
+									: $(".site-header")[0].getBoundingClientRect().height,
+								refOffsetTop = rightSidebar.offset().top - ref.offset().top + siteHeaderHeight,
+								refOffsetTop = roundToTenth(refOffsetTop),
+								rightSidebarScrollPos = rightSidebar.offset().top - $(window).scrollTop(),
+								topOut;
+
+							if (rightSidebarScrollPos >= refOffsetTop) {
+								topOut = true;
+								body.addClass('scrollSpyTopOut');	
 							} else {
-								body.removeClass('scrollSpyBottomOut');
-								bottomOut = false;
+								topOut = false;
+								body.removeClass('scrollSpyTopOut');
+								fixedTop = refOffsetTop;
 							}
 						}
+						$(this).css('top', fixedTop);
 					});
 				} else {
 					body.removeClass('scrollSpyBottomOut');
@@ -711,14 +749,31 @@
 			sizeSideBar();
 			sizeCards();
 		}
-		$(window).on('resize', function () {
-			resizeFuncs();
-		});
 		function scrollFuncs() {
 			scrollSpySideBar();
 		}
-		$(window).on('scroll', function () {
-			scrollFuncs();
-		});
+		function loadFuncs() {
+			if (false === windowLoaded) {
+				sizeSideBar();
+				scrollSpySideBar();
+			}
+			return (windowLoaded = true);
+		}
+
+		// Fire Load Functions if 10 seconds have passed from script load. (for slow connections).
+		setTimeout(function () {
+			loadFuncs();
+		}, 10000);
+
+		$(window)
+			.on('resize', function () {
+				resizeFuncs();
+			})
+			.on('load', function () {
+				loadFuncs();
+			})
+			.on('scroll', function () {
+				scrollFuncs();
+			});
 	});
 })(jQuery);
